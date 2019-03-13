@@ -3,7 +3,6 @@ import Account from "../account/Account";
 class User {
   name: string;
   age: number;
-  incomes: Items[];
   dataSubmited: boolean;
   accounts: Account[];
 
@@ -15,6 +14,13 @@ class User {
   public getTotalIncome(): number {
     return this.accounts.reduce(
       (result, nextItem) => result + nextItem.getTotalIncome,
+      0
+    );
+  }
+
+  public getTotalSpending(): number {
+    return this.accounts.reduce(
+      (result, nextItem) => result + nextItem.getTotalSpending,
       0
     );
   }

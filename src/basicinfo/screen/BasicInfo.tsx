@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import User from "../model/user/User";
-import UserController from "../controller/UserController";
+import User from "../../model/user/User";
+import UserController from "../../controller/UserController";
 
 interface BasicInfoState {
   user: User;

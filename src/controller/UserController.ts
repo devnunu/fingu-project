@@ -22,7 +22,7 @@ class UserController {
     this.userListnerList.delete(userListner);
   }
 
-  private notifyUserListner() {
+  public notifyUserListner() {
     this.userListnerList.forEach(item => item(this.user));
   }
 }

@@ -5,8 +5,8 @@ import User from "../model/user/User";
 import UserController from "../controller/UserController";
 
 // view
-import Dashboard from "../screen/Dashboard";
-import BasicInfo from "../screen/BasicInfo";
+import Dashboard from "../dashboard/screen/Dashboard";
+import BasicInfo from "../basicinfo/screen/BasicInfo";
 
 interface FinguRouterState {
   user: User;
@@ -22,6 +22,10 @@ class FinguRouter extends Component<{}, FinguRouterState> {
 
   componentWillMount() {
     UserController.setUserListner(this.onFetchUser.bind(this));
+  }
+
+  componentWillUnmount() {
+    UserController.deleteUserListner(this.onFetchUser);
   }
 
   render() {
