@@ -18,10 +18,12 @@ class AccountItemView extends Component<AccountItemViewProps, {}> {
           <span>수입:</span>
           <span>{account.getTotalIncome()}</span>
         </div>
+        <div>수입 추가</div>
         <div>
           <span>지출:</span>
           <span>{account.getTotalSpending()}</span>
         </div>
+        <div>지출 추가</div>
         <div onClick={() => this.props.onDeleteAccount(index)}>통장제거</div>
       </div>
     );

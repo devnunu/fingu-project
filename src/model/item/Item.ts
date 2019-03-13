@@ -12,11 +12,7 @@ class Item {
   }
 
   public isSpending(): boolean {
-    return (
-      this.type === ItemType.FIXEDSPENDING ||
-      this.type === ItemType.CHANGEDSPENDING ||
-      this.type === ItemType.SEASONALSPENDING
-    );
+    return this.type !== ItemType.INCOME;
   }
 }
 

@@ -1,11 +1,11 @@
 export enum ItemType {
-  SAVINGINVEST = 1,
-  FIXEDSPENDING = 2,
-  CHANGEDSPENDING = 3,
-  SEASONALSPENDING = 4
+  INCOME = 0,
+  SAVINGINVEST,
+  SPENDING
 }
 
 const ItemTypeNames: string[] = [
+  "수입",
   "저축투자",
   "고정지출",
   "변동지출",
