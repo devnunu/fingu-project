@@ -7,16 +7,19 @@ import UserController from "../../controller/UserController";
 // view
 import SummaryView from "../component/SummaryView";
 import AccountsView from "../component/AccountsView";
+import ItemInputView from "../component/ItemInputView";
 
 interface DashboardState {
   user: User;
+  selAccountIndex: number;
 }
 
 class Dashboard extends Component<{}, DashboardState> {
   constructor(props) {
     super(props);
     this.state = {
-      user: new User()
+      user: new User(),
+      selAccount: -1
     };
   }
 
@@ -34,16 +37,21 @@ class Dashboard extends Component<{}, DashboardState> {
   }
 
   render() {
-    const { user } = this.state;
+    const { user, selAccountIndex } = this.state;
+    console.log();
     return (
       <div>
         <SummaryView user={user} />
         <AccountsView
           accounts={user.accounts}
           onClickCreateAccount={this.onClickCreateAccount.bind(this)}
+          onClickInput={this.onClickInput.bind(this)}
           onUpdateAccounts={this.onUpdateAccounts.bind(this)}
           onDeleteAccount={this.onDeleteAccount.bind(this)}
         />
+        {selAccountIndex > -1 ? (
+          <ItemInputView account={user.accounts[selAccountIndex]} />
+        ) : null}
       </div>
     );
   }
@@ -64,6 +72,10 @@ class Dashboard extends Component<{}, DashboardState> {
     const { user } = this.state;
     user.accounts.splice(index, 1);
     UserController.setUser(user);
+  }
+
+  private onClickInput(selAccountIndex: number): void {
+    this.setState({ ...this.state, selAccountIndex });
   }
 }
 

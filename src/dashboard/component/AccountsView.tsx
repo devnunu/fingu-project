@@ -8,6 +8,7 @@ import AccountItemView from "./AccountItemView";
 interface AccountsViewProps {
   accounts: Account[];
   onClickCreateAccount: () => void;
+  onClickInput: (selAccountIndex) => void;
   onUpdateAccounts: (accounts: Account[]) => void;
   onDeleteAccount: (index: number) => void;
 }
@@ -33,6 +34,7 @@ class AccountsView extends Component<AccountsViewProps, {}> {
         key={index}
         index={index}
         account={account}
+        onClickInput={this.props.onClickInput}
         onDeleteAccount={this.props.onDeleteAccount}
       />
     ));
