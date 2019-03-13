@@ -13,14 +13,14 @@ class User {
 
   public getTotalIncome(): number {
     return this.accounts.reduce(
-      (result, nextItem) => result + nextItem.getTotalIncome,
+      (result, nextItem) => result + nextItem.getTotalIncome(),
       0
     );
   }
 
   public getTotalSpending(): number {
     return this.accounts.reduce(
-      (result, nextItem) => result + nextItem.getTotalSpending,
+      (result, nextItem) => result + nextItem.getTotalSpending(),
       0
     );
   }

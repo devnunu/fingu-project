@@ -1,6 +1,8 @@
 import Item from "../item/Item";
 
 class Account {
+  id: number;
+  name: string;
   balance: number;
   incomes: Item[];
   spendings: Item[];

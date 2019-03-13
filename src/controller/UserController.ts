@@ -10,6 +10,7 @@ class UserController {
   }
 
   public setUser(user: User) {
+    console.log("FunctionCalled[setUser]");
     this.user = user;
     this.notifyUserListner();
   }
@@ -23,6 +24,7 @@ class UserController {
   }
 
   public notifyUserListner() {
+    console.log("FunctionCalled[notify]");
     this.userListnerList.forEach(item => item(this.user));
   }
 }
