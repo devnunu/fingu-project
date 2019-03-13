@@ -42,6 +42,7 @@ class Dashboard extends Component<{}, DashboardState> {
           accounts={user.accounts}
           onClickCreateAccount={this.onClickCreateAccount.bind(this)}
           onUpdateAccounts={this.onUpdateAccounts.bind(this)}
+          onDeleteAccount={this.onDeleteAccount.bind(this)}
         />
       </div>
     );
@@ -56,6 +57,12 @@ class Dashboard extends Component<{}, DashboardState> {
   private onUpdateAccounts(accounts: Account[]): void {
     const { user } = this.state;
     user.accounts = accounts;
+    UserController.setUser(user);
+  }
+
+  private onDeleteAccount(index: number): void {
+    const { user } = this.state;
+    user.accounts.splice(index, 1);
     UserController.setUser(user);
   }
 }
