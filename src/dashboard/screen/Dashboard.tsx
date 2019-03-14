@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Account from "../../model/account/Account";
+import Item from "../../model/item/Item";
 import User from "../../model/user/User";
 import UserController from "../../controller/UserController";
 
@@ -19,7 +20,7 @@ class Dashboard extends Component<{}, DashboardState> {
     super(props);
     this.state = {
       user: new User(),
-      selAccount: -1
+      selAccountIndex: -1
     };
   }
 
@@ -50,7 +51,10 @@ class Dashboard extends Component<{}, DashboardState> {
           onDeleteAccount={this.onDeleteAccount.bind(this)}
         />
         {selAccountIndex > -1 ? (
-          <ItemInputView account={user.accounts[selAccountIndex]} />
+          <ItemInputView
+            account={user.accounts[selAccountIndex]}
+            onAddAccountItem={this.onAddAccountItem.bind(this)}
+          />
         ) : null}
       </div>
     );
@@ -78,7 +82,18 @@ class Dashboard extends Component<{}, DashboardState> {
     this.setState({ ...this.state, selAccountIndex });
   }
 
-  private onAddAccountItem(account: Account) {}
+  private onAddAccountItem(item: Item) {
+    if (item.validAllProperties()) this.handleAddAccountItem(item);
+    else alert("모든 input을 입력해주세요");
+  }
+
+  private handleAddAccountItem(item: Item) {
+    const { user, selAccountIndex } = this.state;
+    item.isSpending()
+      ? user.accounts[selAccountIndex].spendings.push(item)
+      : user.accounts[selAccountIndex].incomes.push(item);
+    this.setState({ ...this.state, user, selAccountIndex: -1 });
+  }
 }
 
 export default Dashboard;

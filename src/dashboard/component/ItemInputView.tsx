@@ -8,7 +8,7 @@ import ItemController from "../../controller/ItemController";
 
 interface ItemInputViewProps {
   account: Account;
-  onAddAccountItem: (account: Account) => void;
+  onAddAccountItem: (item: Item) => void;
 }
 
 interface ItemInputViewState {
@@ -60,9 +60,11 @@ class ItemInputView extends Component<ItemInputViewProps, ItemInputViewState> {
         </div>
         <div>
           <span>금액</span>
-          <input type="text" onChange={this.onChangeItemAmount.bind(this)} />
+          <input type="number" onChange={this.onChangeItemAmount.bind(this)} />
         </div>
-        <button onClick={this.props.onAddAccountItem}>완료</button>
+        <button onClick={event => this.props.onAddAccountItem(item)}>
+          완료
+        </button>
       </div>
     );
   }
@@ -88,7 +90,7 @@ class ItemInputView extends Component<ItemInputViewProps, ItemInputViewState> {
 
   private onChangeItemAmount(event) {
     const { item } = this.state;
-    item.amount = event.target.value;
+    item.amount = parseInt(event.target.value);
     this.setState({ ...this.state, item });
   }
 }

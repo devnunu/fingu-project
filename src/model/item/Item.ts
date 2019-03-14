@@ -1,5 +1,5 @@
-import { ItemType } from "./ItemType";
-import { ItemCategory } from "./ItemCategory";
+import ItemType from "./ItemType";
+import ItemCategory from "./ItemCategory";
 
 class Item {
   name: string;
@@ -20,7 +20,16 @@ class Item {
   }
 
   public isSpending(): boolean {
-    return this.type !== ItemType.INCOME;
+    return this.type.property !== ItemType.INCOME;
+  }
+
+  public validAllProperties(): boolean {
+    return (
+      this.name !== undefined &&
+      this.amount !== undefined &&
+      this.type !== undefined &&
+      this.category !== undefined
+    );
   }
 }
 

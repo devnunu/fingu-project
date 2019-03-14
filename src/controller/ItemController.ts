@@ -64,11 +64,11 @@ class ItemController {
     ];
   }
 
-  public getItemTypes() {
+  public getItemTypes(): ItemType[] {
     return this.itemTypes;
   }
 
-  public getItemTypeById(property: number) {
+  public getItemTypeById(property: number): ItemType {
     let result;
     this.itemTypes.forEach(itemType => {
       if (itemType.property === property) {
@@ -88,13 +88,13 @@ class ItemController {
     return result;
   }
 
-  public getItemCategories(itemType: number) {
+  public getItemCategories(itemType: number): ItemCategory[] {
     return this.itemCategories.filter(
       category => category.parentItemType === itemType
     );
   }
 
-  public getItemCategoryByName(name: string): ItemType {
+  public getItemCategoryByName(name: string): ItemCategory {
     let result;
     this.itemCategories.forEach(itemCategory => {
       if (itemCategory.name === name) {

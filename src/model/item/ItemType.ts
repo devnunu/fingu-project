@@ -3,10 +3,10 @@ class ItemType {
   public static SAVINGINVEST = 1;
   public static SPENDING = 2;
 
-  property: string;
+  property: number;
   name: string;
 
-  constructor(property: string, name: string) {
+  constructor(property: number, name: string) {
     this.property = property;
     this.name = name;
   }
