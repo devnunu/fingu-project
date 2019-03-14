@@ -77,6 +77,8 @@ class Dashboard extends Component<{}, DashboardState> {
   private onClickInput(selAccountIndex: number): void {
     this.setState({ ...this.state, selAccountIndex });
   }
+
+  private onAddAccountItem(account: Account) {}
 }
 
 export default Dashboard;
