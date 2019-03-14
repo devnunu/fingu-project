@@ -56,11 +56,11 @@ class ItemInputView extends Component<ItemInputViewProps, ItemInputViewState> {
         </select>
         <div>
           <span>내역명</span>
-          <input type="text" />
+          <input type="text" onChange={this.onChangeItemName.bind(this)} />
         </div>
         <div>
           <span>금액</span>
-          <input type="text" />
+          <input type="text" onChange={this.onChangeItemAmount.bind(this)} />
         </div>
         <button onClick={this.props.onAddAccountItem}>완료</button>
       </div>
@@ -77,6 +77,18 @@ class ItemInputView extends Component<ItemInputViewProps, ItemInputViewState> {
   private onChangeItemCategory(event) {
     const { item } = this.state;
     item.category = ItemController.getItemCategoryByName(event.target.value);
+    this.setState({ ...this.state, item });
+  }
+
+  private onChangeItemName(event) {
+    const { item } = this.state;
+    item.name = event.target.value;
+    this.setState({ ...this.state, item });
+  }
+
+  private onChangeItemAmount(event) {
+    const { item } = this.state;
+    item.amount = event.target.value;
     this.setState({ ...this.state, item });
   }
 }
