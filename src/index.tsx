@@ -3,7 +3,7 @@ import { render } from "react-dom";
 
 import Router from "./router/Router";
 
-import "./styles.css";
+import "./styles.scss";
 
 function App() {
   return (
