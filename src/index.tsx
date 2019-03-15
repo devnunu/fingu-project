@@ -1,5 +1,5 @@
-import * as React from "react";
-import { render } from "react-dom";
+import React from "react";
+import ReactDom from "react-dom";
 
 import Router from "./router/Router";
 
@@ -13,5 +13,4 @@ function App() {
   );
 }
 
-const rootElement = document.getElementById("root");
-render(<App />, rootElement);
+ReactDom.render(<App />, document.getElementById("root") as HTMLElement);

@@ -1,6 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
+import { Component } from "react";
 
 import User from "../../model/user/User";
+
+// style
+import styles from "./SummaryView.scss";
 
 interface SummaryViewProps {
   user: User;

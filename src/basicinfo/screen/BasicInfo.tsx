@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import * as React from "react";
+import { Component } from "react";
 
 import User from "../../model/user/User";
 import UserController from "../../controller/UserController";
@@ -20,11 +21,11 @@ class BasicInfo extends Component<{}, BasicInfoState> {
       <div>
         <div>
           <span>이름</span>
-          <input onChange={this.onChangeUsername.bind(this)} />
+          <input type="text" onChange={this.onChangeUsername.bind(this)} />
         </div>
         <div>
           <span>나이</span>
-          <input onChange={this.onChangeUserAge.bind(this)} />
+          <input type="number" onChange={this.onChangeUserAge.bind(this)} />
         </div>
         <button onClick={this.onClickSubmitButton.bind(this)}>확인</button>
       </div>
