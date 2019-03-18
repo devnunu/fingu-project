@@ -1,5 +1,4 @@
-import * as React from "react";
-import { Component } from "react";
+import React,{ Component } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import User from "../model/user/User";

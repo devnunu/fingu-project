@@ -1,15 +1,14 @@
-import * as React from "react";
-import { Component } from "react";
+import React, { Component } from 'react';
 
-import Account from "../../model/account/Account";
-import Item from "../../model/item/Item";
-import User from "../../model/user/User";
-import UserController from "../../controller/UserController";
+import Account from '../../model/account/Account';
+import Item from '../../model/item/Item';
+import User from '../../model/user/User';
+import UserController from '../../controller/UserController';
 
 // view
-import SummaryView from "../component/SummaryView";
-import AccountsView from "../component/AccountsView";
-import ItemInputView from "../component/ItemInputView";
+import SummaryView from '../component/SummaryView';
+import AccountsView from '../component/AccountsView';
+import ItemInputView from '../component/ItemInputView';
 
 interface DashboardState {
   user: User;
@@ -21,7 +20,7 @@ class Dashboard extends Component<{}, DashboardState> {
     super(props);
     this.state = {
       user: new User(),
-      selAccountIndex: -1
+      selAccountIndex: -1,
     };
   }
 
@@ -52,10 +51,7 @@ class Dashboard extends Component<{}, DashboardState> {
           onDeleteAccount={this.onDeleteAccount.bind(this)}
         />
         {selAccountIndex > -1 ? (
-          <ItemInputView
-            account={user.accounts[selAccountIndex]}
-            onAddAccountItem={this.onAddAccountItem.bind(this)}
-          />
+          <ItemInputView account={user.accounts[selAccountIndex]} onAddAccountItem={this.onAddAccountItem.bind(this)} />
         ) : null}
       </div>
     );
@@ -85,7 +81,7 @@ class Dashboard extends Component<{}, DashboardState> {
 
   private onAddAccountItem(item: Item) {
     if (item.validAllProperties()) this.handleAddAccountItem(item);
-    else alert("모든 input을 입력해주세요");
+    else alert('모든 input을 입력해주세요');
   }
 
   private handleAddAccountItem(item: Item) {

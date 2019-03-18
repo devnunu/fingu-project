@@ -1,10 +1,9 @@
-import React from "react";
-import { Component } from "react";
+import React, { Component } from 'react';
 
-import User from "../../model/user/User";
+import User from '../../model/user/User';
 
 // style
-import styles from "./SummaryView.scss";
+import styles from './SummaryView.scss';
 
 interface SummaryViewProps {
   user: User;
@@ -13,10 +12,10 @@ interface SummaryViewProps {
 class SummaryView extends Component<SummaryViewProps, {}> {
   render() {
     const { user } = this.props;
-    console.log("user", user);
+    console.log('styles', styles);
     return (
       <div>
-        <div>
+        <div className={styles.container}>
           <span>이름</span>
           {user.name}
         </div>
