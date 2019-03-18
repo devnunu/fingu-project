@@ -1,0 +1,48 @@
+.container {
+  position: relative;
+  padding: 20px 0px;
+  transition: all 0.4s ease-out;
+  opacity: 0;
+  border-bottom: 1px solid #ededed;
+  &.animated {
+    opacity: 1;
+  }
+  .accountLogo {
+    display: inline-block;
+    width: 20%;
+    padding: 40px 0px;
+    border-radius: 5px;
+    text-align: center;
+    max-width: 160px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+  .contentBox {
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px 10px 0px;
+    width: 50%;
+  }
+  .buttonBox {
+    position: absolute;
+    display: inline-block;
+    top: 20px;
+    right: 0px;
+    .deleteButton {
+      background: white;
+      border: 1px solid lightgray;
+      margin-right: 5px;
+      color: black;
+      &:hover {
+        background: #dee4e8;
+      }
+    }
+  }
+  .totalSummary {
+    position: absolute;
+    bottom: 20px;
+    right: 0px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+}

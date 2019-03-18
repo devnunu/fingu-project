@@ -1,4 +1,5 @@
-import Item from "../item/Item";
+import Item from '../item/Item';
+import StyleUtil from '../../common/utils/StyleUtil';
 
 class Account {
   id: number;
@@ -6,10 +7,12 @@ class Account {
   balance: number;
   incomes: Item[];
   spendings: Item[];
+  accountColor: string;
 
   constructor() {
     this.incomes = new Array();
     this.spendings = new Array();
+    this.accountColor = StyleUtil.getRandomColor();
   }
 
   public getTotalIncome(): number {

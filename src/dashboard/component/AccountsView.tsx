@@ -30,16 +30,22 @@ class AccountsView extends Component<AccountsViewProps, {}> {
             계좌 추가 +
           </div>
         </div>
-        {accounts.length === 0 ? (
-          <div className={styles.emptyAccountBox}>
-            앗 아직 계좌가 없군요!
-            <br />
-            우측 상단의 <span>계좌 추가</span>를 눌러주세요.
-          </div>
-        ) : (
-          this.renderAccountItem(accounts)
-        )}
+        <div className={styles.itemList}>
+          {accounts.length === 0
+            ? this.renderEmptyAccountBox()
+            : this.renderAccountItem(accounts)}
+        </div>
       </Container>
+    );
+  }
+
+  renderEmptyAccountBox() {
+    return (
+      <div className={styles.emptyAccountBox}>
+        앗 아직 계좌가 없군요!
+        <br />
+        우측 상단의 <span>계좌 추가</span>를 눌러주세요.
+      </div>
     );
   }
 
@@ -49,6 +55,7 @@ class AccountsView extends Component<AccountsViewProps, {}> {
         key={index}
         index={index}
         account={account}
+        className={styles.accountItem}
         onClickInput={this.props.onClickInput}
         onDeleteAccount={this.props.onDeleteAccount}
       />
