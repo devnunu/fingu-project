@@ -6,7 +6,9 @@
   "main": "src/index.tsx",
   "dependencies": {
     "autoprefixer": "^9.5.0",
+    "babel-plugin-module-resolver": "^3.2.0",
     "classnames": "2.2.6",
+    "common": "^0.2.5",
     "node-sass": "4.11.0",
     "parcel-bundler": "1.12.2",
     "postcss-modules": "^1.4.1",
@@ -17,6 +19,7 @@
     "typescript": "3.0.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.3.4",
     "@types/classnames": "2.2.7",
     "@types/node-sass": "4.11.0",
     "@types/parcel-bundler": "1.10.2",

@@ -1,8 +1,14 @@
-import * as React from "react";
-import { Component } from "react";
+import * as React from 'react';
+import { Component } from 'react';
 
-import User from "../../model/user/User";
-import UserController from "../../controller/UserController";
+import User from '../../model/user/User';
+import UserController from '../../controller/UserController';
+
+// view
+import Button from '../../common/component/button/Button';
+import Input from '../../common/component/input/Input';
+
+import styles from './BasicInfo.scss';
 
 interface BasicInfoState {
   user: User;
@@ -18,16 +24,20 @@ class BasicInfo extends Component<{}, BasicInfoState> {
 
   render() {
     return (
-      <div>
-        <div>
-          <span>이름</span>
-          <input type="text" onChange={this.onChangeUsername.bind(this)} />
-        </div>
-        <div>
-          <span>나이</span>
-          <input type="number" onChange={this.onChangeUserAge.bind(this)} />
-        </div>
-        <button onClick={this.onClickSubmitButton.bind(this)}>확인</button>
+      <div className={styles.container}>
+        <Input
+          className={styles.nameInput}
+          label="이름"
+          type="text"
+          onChange={this.onChangeUsername.bind(this)}
+        />
+        <Input
+          className={styles.ageInput}
+          label="나이"
+          type="number"
+          onChange={this.onChangeUserAge.bind(this)}
+        />
+        <Button onClick={this.onClickSubmitButton.bind(this)} text="확인" />
       </div>
     );
   }

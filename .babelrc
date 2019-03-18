@@ -1,0 +1,19 @@
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        // root 폴더 설정
+        "root": "./src",
+        "alias": {
+          "common": "./src/common",
+          "basicinfo": "./src/basicinfo",
+          "controller": "./src/controller",
+          "dashboard": "./src/dashboard",
+          "model": "./src/model",
+          "router": "./src/router"
+        }
+      }
+    ]
+  ]
+}
