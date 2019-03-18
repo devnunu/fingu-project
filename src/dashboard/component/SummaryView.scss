@@ -1,3 +1,55 @@
-.container {
-    background: aqua;
+.containter {
+  margin-bottom: 20px;
+  .title {
+    display: inline-block;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    padding-bottom: 8px;
+    span {
+      color: #0084dd;
+    }
+  }
+
+  .description {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+
+    span {
+      color: #0084dd;
+    }
+  }
+
+  .status {
+    margin-top: 30px;
+    .incomeSection,
+    .spendingSection {
+      display: inline-block;
+      width: 50%;
+      .incomeLabel,
+      .spendingLabel {
+        font-weight: 700;
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+      .income,
+      .spending {
+        font-size: 24px;
+        font-weight: 700;
+      }
+      .income {
+        color: #0084dd;
+      }
+      .spending {
+        color: #9c9c9c;
+      }
+      .unit {
+        padding-left: 3px;
+        color: black;
+        font-weight: 700;
+      }
+    }
+  }
 }

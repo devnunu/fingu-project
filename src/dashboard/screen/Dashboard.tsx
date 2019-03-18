@@ -10,6 +10,8 @@ import SummaryView from '../component/SummaryView';
 import AccountsView from '../component/AccountsView';
 import ItemInputView from '../component/ItemInputView';
 
+import styles from './Dashboard.scss';
+
 interface DashboardState {
   user: User;
   selAccountIndex: number;
@@ -39,10 +41,9 @@ class Dashboard extends Component<{}, DashboardState> {
 
   render() {
     const { user, selAccountIndex } = this.state;
-    console.log();
     return (
-      <div>
-        <SummaryView user={user} />
+      <div className={styles.container}>
+        <SummaryView className={styles.summaryView} user={user} />
         <AccountsView
           accounts={user.accounts}
           onClickCreateAccount={this.onClickCreateAccount.bind(this)}

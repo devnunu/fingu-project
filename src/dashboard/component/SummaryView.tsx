@@ -1,37 +1,49 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 
+// model
 import User from '../../model/user/User';
+
+// view
+import Container from '../../common/component/container/Container';
 
 // style
 import styles from './SummaryView.scss';
 
 interface SummaryViewProps {
+  className?: string;
   user: User;
 }
 
 class SummaryView extends Component<SummaryViewProps, {}> {
   render() {
     const { user } = this.props;
-    console.log('styles', styles);
     return (
-      <div>
-        <div className={styles.container}>
-          <span>이름</span>
-          {user.name}
+      <Container className={styles.containter}>
+        <div className={styles.title}>
+          당신의 금융친구 <span>Fingu</span>
         </div>
-        <div>
-          <span>나이</span>
-          {user.age}
+        <div className={styles.description}>
+          안녕하세요 <span>{user.name}</span>님! 통장을 분리해서 합리적인
+          소비생활을 시작해볼까요?
         </div>
-        <div>
-          <span>수입</span>
-          <span>{user.getTotalIncome()}</span>
+        <div className={styles.status}>
+          <div className={styles.incomeSection}>
+            <p className={styles.incomeLabel}>수입</p>
+            <div>
+              <span className={styles.income}>{user.getTotalIncome()}</span>
+              <span className={styles.unit}>원</span>
+            </div>
+          </div>
+          <div className={styles.spendingSection}>
+            <p className={styles.spendingLabel}>지출</p>
+            <div>
+              <span className={styles.spending}>{user.getTotalSpending()}</span>
+              <span className={styles.unit}>원</span>
+            </div>
+          </div>
         </div>
-        <div>
-          <span>지출</span>
-          <span>{user.getTotalSpending()}</span>
-        </div>
-      </div>
+      </Container>
     );
   }
 }
