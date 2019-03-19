@@ -2,10 +2,18 @@
   width: 90%;
   position: relative;
   overflow: hidden;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.12),
-    1px 1px 1px 1px rgba(0, 0, 0, 0.24);
+  margin-left: 5px;
+  margin-top: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border: 2px solid #ffffffff;
   border-radius: 8px;
-  border-bottom: 1px solid #ededed;
+  &.selected {
+    border-style: solid;
+    border-image: linear-gradient(19deg, #21d4fd 0%, #0084dd 100%);
+    border-image-slice: 1;
+    border-image-width: 2px;
+    box-sizing: border-box;
+  }
   // 상단 계좌정보
   .accountTopInfoBox {
     padding: 10px 10px 0px;

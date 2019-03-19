@@ -22,7 +22,7 @@ class Dashboard extends Component<{}, DashboardState> {
     super(props);
     this.state = {
       user: new User(),
-      selAccountIndex: -1,
+      selAccountIndex: -1
     };
   }
 
@@ -46,13 +46,17 @@ class Dashboard extends Component<{}, DashboardState> {
         <SummaryView className={styles.summaryView} user={user} />
         <AccountsView
           accounts={user.accounts}
+          selAccountIndex={selAccountIndex}
           onClickCreateAccount={this.onClickCreateAccount.bind(this)}
-          onClickInput={this.onClickInput.bind(this)}
+          onClickSelectAccount={this.onClickSelectAccount.bind(this)}
           onUpdateAccounts={this.onUpdateAccounts.bind(this)}
           onDeleteAccount={this.onDeleteAccount.bind(this)}
         />
         {selAccountIndex > -1 ? (
-          <ItemInputView account={user.accounts[selAccountIndex]} onAddAccountItem={this.onAddAccountItem.bind(this)} />
+          <ItemInputView
+            account={user.accounts[selAccountIndex]}
+            onAddAccountItem={this.onAddAccountItem.bind(this)}
+          />
         ) : null}
       </div>
     );
@@ -76,7 +80,7 @@ class Dashboard extends Component<{}, DashboardState> {
     UserController.setUser(user);
   }
 
-  private onClickInput(selAccountIndex: number): void {
+  private onClickSelectAccount(selAccountIndex: number): void {
     this.setState({ ...this.state, selAccountIndex });
   }
 

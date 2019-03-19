@@ -1,48 +1,31 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 
+// model
 import Account from '../../model/account/Account';
 
+// util
 import StringUtil from 'common/utils/StringUtil';
-import Button from '../../common/component/button/Button';
 
+// style
 import styles from './AccountItemView.scss';
 
 interface AccountItemViewProps {
   index: number;
   account: Account;
+  selected: boolean;
   className?: string;
-  onClickInput: (selAccountIndex) => void;
+  onClickSelectAccount: (selAccountIndex) => void;
   onDeleteAccount: (index: number) => void;
 }
 
-interface AccountItemViewState {
-  reveal: boolean;
-}
-
-class AccountItemView extends Component<
-  AccountItemViewProps,
-  AccountItemViewState
-> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      reveal: false
-    };
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({ ...this.state, reveal: true });
-    }, 1);
-  }
-
+class AccountItemView extends Component<AccountItemViewProps, {}> {
   render() {
-    const { account, index } = this.props;
+    const { account, index, selected } = this.props;
     return (
       <div
         className={classNames(this.props.className, styles.container, {
-          [styles.animated]: this.state.reveal
+          [styles.selected]: selected
         })}
         style={{ background: account.accountColor }}
       >
@@ -70,7 +53,10 @@ class AccountItemView extends Component<
           >
             삭제
           </div>
-          <div className={styles.selectButton} onClick={() => null}>
+          <div
+            className={styles.selectButton}
+            onClick={() => this.props.onClickSelectAccount(index)}
+          >
             선택
           </div>
         </div>

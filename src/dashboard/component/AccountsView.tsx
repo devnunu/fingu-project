@@ -12,8 +12,9 @@ import styles from './AccountsView.scss';
 
 interface AccountsViewProps {
   accounts: Account[];
+  selAccountIndex: number;
   onClickCreateAccount: () => void;
-  onClickInput: (selAccountIndex) => void;
+  onClickSelectAccount: (selAccountIndex) => void;
   onUpdateAccounts: (accounts: Account[]) => void;
   onDeleteAccount: (index: number) => void;
 }
@@ -64,8 +65,9 @@ class AccountsView extends Component<AccountsViewProps, {}> {
             key={index}
             index={index}
             account={account}
+            selected={index === this.props.selAccountIndex}
             className={styles.accountItem}
-            onClickInput={this.props.onClickInput}
+            onClickSelectAccount={this.props.onClickSelectAccount}
             onDeleteAccount={this.props.onDeleteAccount}
           />
         ))}
