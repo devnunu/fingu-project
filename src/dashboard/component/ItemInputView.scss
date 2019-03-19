@@ -1,0 +1,31 @@
+.container {
+  .topBox {
+    margin-bottom: 15px;
+    .title,
+    .selectorBox {
+      display: inline-block;
+      width: 50%;
+    }
+    .title {
+      font-size: 24px;
+      font-weight: 400;
+    }
+    .selectorBox {
+      text-align: right;
+      .selectorType {
+        margin-right: 10px;
+      }
+      .selectorCategory {
+      }
+    }
+  }
+  .inputItemName {
+    margin-bottom: 15px;
+  }
+  .inputItemAmount {
+    margin-bottom: 15px;
+  }
+  .addButtonBox {
+    text-align: center;
+  }
+}

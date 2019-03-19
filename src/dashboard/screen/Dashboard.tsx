@@ -6,9 +6,10 @@ import User from '../../model/user/User';
 import UserController from '../../controller/UserController';
 
 // view
-import SummaryView from '../component/SummaryView';
-import AccountsView from '../component/AccountsView';
-import ItemInputView from '../component/ItemInputView';
+import SummaryView from 'dashboard/component/SummaryView';
+import AccountsView from 'dashboard/component/AccountsView';
+import ItemInputView from 'dashboard/component/ItemInputView';
+import DetailView from 'dashboard/component/DetailView';
 
 import styles from './Dashboard.scss';
 
@@ -53,7 +54,7 @@ class Dashboard extends Component<{}, DashboardState> {
           onDeleteAccount={this.onDeleteAccount.bind(this)}
         />
         {selAccountIndex > -1 ? (
-          <ItemInputView
+          <DetailView
             account={user.accounts[selAccountIndex]}
             onAddAccountItem={this.onAddAccountItem.bind(this)}
           />

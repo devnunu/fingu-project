@@ -1,11 +1,22 @@
-import * as React from "react";
-import { Component } from "react";
+import * as React from 'react';
+import { Component } from 'react';
 
-import Item from "../../model/item/Item";
-import ItemType from "../../model/item/ItemType";
-import ItemCategory from "../../model/item/ItemCategory";
-import Account from "../../model/account/Account";
-import ItemController from "../../controller/ItemController";
+// model
+import Item from '../../model/item/Item';
+import ItemType from '../../model/item/ItemType';
+import ItemCategory from '../../model/item/ItemCategory';
+import Account from '../../model/account/Account';
+
+// controller
+import ItemController from '../../controller/ItemController';
+
+// view
+import Button from 'common/component/button/Button';
+import Selector from 'common/component/input/Selector';
+import Input from 'common/component/input/Input';
+
+// styles
+import styles from './ItemInputView.scss';
 
 interface ItemInputViewProps {
   account: Account;
@@ -32,40 +43,41 @@ class ItemInputView extends Component<ItemInputViewProps, ItemInputViewState> {
     const { account } = this.props;
     const { item } = this.state;
     return (
-      <div>
-        <select
-          onChange={this.onChangeItemType.bind(this)}
-          value={item.type.name}
-        >
-          {ItemController.getItemTypes().map((itemType, index) => (
-            <option key={index} value={itemType.name}>
-              {itemType.name}
-            </option>
-          ))}
-        </select>
-        <select
-          onChange={this.onChangeItemCategory.bind(this)}
-          value={item.category.name}
-        >
-          {ItemController.getItemCategories(item.type.property).map(
-            (category, index) => (
-              <option key={index} value={category.name}>
-                {category.name}
-              </option>
-            )
-          )}
-        </select>
-        <div>
-          <span>내역명</span>
-          <input type="text" onChange={this.onChangeItemName.bind(this)} />
+      <div className={styles.container}>
+        <div className={styles.topBox}>
+          <div className={styles.title}>내역 추가</div>
+          <div className={styles.selectorBox}>
+          <Selector
+            className={styles.selectorType}
+            items={ItemController.getItemTypeNames()}
+            onChange={this.onChangeItemType.bind(this)}
+          />
+          <Selector
+            className={styles.selectorCategory}
+            items={ItemController.getCategoryNames(item.type.property)}
+            onChange={this.onChangeItemCategory.bind(this)}
+          />
+          </div>
         </div>
-        <div>
-          <span>금액</span>
-          <input type="number" onChange={this.onChangeItemAmount.bind(this)} />
+        <Input
+          className={styles.inputItemName}
+          type="text"
+          label="내역명"
+          onChange={this.onChangeItemName.bind(this)}
+        />
+        <Input
+          className={styles.inputItemAmount}
+          type="number"
+          label="금액"
+          onChange={this.onChangeItemAmount.bind(this)}
+        />
+        <div className={styles.addButtonBox}>
+          <Button
+            className={styles.addButton}
+            text="추가"
+            onClick={event => this.props.onAddAccountItem(item)}
+          />
         </div>
-        <button onClick={event => this.props.onAddAccountItem(item)}>
-          완료
-        </button>
       </div>
     );
   }
