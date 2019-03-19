@@ -40,10 +40,14 @@
         font-weight: 700;
       }
       .income {
-        color: #0084dd;
+        text {
+          color: #0084dd;
+        }
       }
       .spending {
-        color: #9c9c9c;
+        text {
+          color: #9c9c9c;
+        }
       }
       .unit {
         padding-left: 3px;

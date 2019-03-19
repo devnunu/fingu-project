@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import Account from '../../model/account/Account';
 
-import styleUtil from '../../common/utils/StyleUtil';
+import StringUtil from 'common/utils/StringUtil';
 import Button from '../../common/component/button/Button';
 
 import styles from './AccountItemView.scss';
@@ -20,14 +20,11 @@ interface AccountItemViewState {
   reveal: boolean;
 }
 
-class AccountItemView extends Component<
-  AccountItemViewProps,
-  AccountItemViewState
-> {
+class AccountItemView extends Component<AccountItemViewProps, AccountItemViewState> {
   constructor(props) {
     super(props);
     this.state = {
-      reveal: false
+      reveal: false,
     };
   }
 
@@ -42,13 +39,10 @@ class AccountItemView extends Component<
     return (
       <div
         className={classNames(this.props.className, styles.container, {
-          [styles.animated]: this.state.reveal
+          [styles.animated]: this.state.reveal,
         })}
       >
-        <div
-          className={styles.accountLogo}
-          style={{ background: account.accountColor }}
-        >
+        <div className={styles.accountLogo} style={{ background: account.accountColor }}>
           나의 계좌 {index + 1}
         </div>
         <div className={styles.contentBox}>
@@ -63,15 +57,13 @@ class AccountItemView extends Component<
         </div>
         <div className={styles.buttonBox}>
           {/* <div onClick={() => this.props.onClickInput(index)}>내역 추가</div> */}
-          <Button
-            className={styles.deleteButton}
-            onClick={() => this.props.onDeleteAccount(index)}
-            text="삭제"
-          />
+          <Button className={styles.deleteButton} onClick={() => this.props.onDeleteAccount(index)} text="삭제" />
           <Button onClick={undefined} text="자세히" />
         </div>
         <div className={styles.totalSummary}>
-          총 {account.getTotalIncome() + account.getTotalSpending()} 원
+          총&nbsp;
+          <text>{StringUtil.getCurrencyValue(account.getTotalIncome() + account.getTotalSpending())}</text>
+          &nbsp;원
         </div>
       </div>
     );
