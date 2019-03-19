@@ -31,14 +31,14 @@ class SummaryView extends Component<SummaryViewProps, {}> {
           <div className={styles.incomeSection}>
             <p className={styles.incomeLabel}>수입</p>
             <div className={styles.income}>
-              <text>{StringUtil.getCurrencyValue(user.getTotalIncome())}</text>
+              <span>{StringUtil.getCurrencyValue(user.getTotalIncome())}</span>
               &nbsp;원
             </div>
           </div>
           <div className={styles.spendingSection}>
             <p className={styles.spendingLabel}>지출</p>
             <div className={styles.spending}>
-              <text>{StringUtil.getCurrencyValue(user.getTotalSpending())}</text>
+              <span>{StringUtil.getCurrencyValue(user.getTotalSpending())}</span>
               &nbsp;원
             </div>
           </div>

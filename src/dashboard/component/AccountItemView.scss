@@ -1,48 +1,58 @@
 .container {
+  width: 90%;
   position: relative;
-  padding: 20px 0px;
-  transition: all 0.4s ease-out;
-  opacity: 0;
+  overflow: hidden;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.12),
+    1px 1px 1px 1px rgba(0, 0, 0, 0.24);
+  border-radius: 8px;
   border-bottom: 1px solid #ededed;
-  &.animated {
-    opacity: 1;
-  }
-  .accountLogo {
-    display: inline-block;
-    width: 20%;
-    padding: 40px 0px;
-    border-radius: 5px;
-    text-align: center;
-    max-width: 160px;
-    border-radius: 4px;
-    font-weight: 700;
-  }
-  .contentBox {
-    display: inline-block;
-    vertical-align: top;
+  // 상단 계좌정보
+  .accountTopInfoBox {
     padding: 10px 10px 0px;
-    width: 50%;
-  }
-  .buttonBox {
-    position: absolute;
-    display: inline-block;
-    top: 20px;
-    right: 0px;
-    .deleteButton {
-      background: white;
-      border: 1px solid lightgray;
-      margin-right: 5px;
-      color: black;
-      &:hover {
-        background: #dee4e8;
-      }
+    div {
+      width: 50%;
+      display: inline-block;
+    }
+    .bankName {
+      text-align: left;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .bankType {
+      text-align: right;
+      font-size: 12px;
+      font-weight: 400;
+      color: #9c9c9c;
     }
   }
-  .totalSummary {
-    position: absolute;
-    bottom: 20px;
-    right: 0px;
-    font-size: 20px;
-    font-weight: 700;
+  // 중간 총 액
+  .contentBox {
+    text-align: center;
+    padding: 30px 0;
+    .totalAmount {
+      font-weight: 700;
+      font-size: 24px;
+    }
+  }
+  // 하단 삭제 선택 버튼
+  .buttonBox {
+    border-top: 1px solid lightgray;
+    div {
+      display: inline-block;
+      width: 50%;
+      font-size: 14px;
+      text-align: center;
+      padding: 10px 0px;
+      font-weight: 700;
+      cursor: pointer;
+      &:hover {
+        background: #00000011;
+      }
+    }
+    .deleteButton {
+      border-right: 1px solid lightgray;
+    }
+    .selectButton {
+    }
   }
 }

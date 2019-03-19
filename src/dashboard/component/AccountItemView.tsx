@@ -20,11 +20,14 @@ interface AccountItemViewState {
   reveal: boolean;
 }
 
-class AccountItemView extends Component<AccountItemViewProps, AccountItemViewState> {
+class AccountItemView extends Component<
+  AccountItemViewProps,
+  AccountItemViewState
+> {
   constructor(props) {
     super(props);
     this.state = {
-      reveal: false,
+      reveal: false
     };
   }
 
@@ -39,31 +42,37 @@ class AccountItemView extends Component<AccountItemViewProps, AccountItemViewSta
     return (
       <div
         className={classNames(this.props.className, styles.container, {
-          [styles.animated]: this.state.reveal,
+          [styles.animated]: this.state.reveal
         })}
+        style={{ background: account.accountColor }}
       >
-        <div className={styles.accountLogo} style={{ background: account.accountColor }}>
-          나의 계좌 {index + 1}
+        {/* 상단 계좌 정보 */}
+        <div className={styles.accountTopInfoBox}>
+          <div className={styles.bankName}>나의 계좌 {index + 1}</div>
+          <div className={styles.bankType}>일반 통장</div>
         </div>
+        {/* 계좌 총 금액 */}
         <div className={styles.contentBox}>
-          <div>
-            <span>수입</span>
-            <span>{account.getTotalIncome()}</span>
-          </div>
-          <div>
-            <span>지출</span>
-            <span>{account.getTotalSpending()}</span>
+          <div className={styles.totalAmount}>
+            <span>
+              {StringUtil.getCurrencyValue(
+                account.getTotalIncome() + account.getTotalSpending()
+              )}
+            </span>
+            &nbsp;원
           </div>
         </div>
+        {/* 하단 버튼 */}
         <div className={styles.buttonBox}>
-          {/* <div onClick={() => this.props.onClickInput(index)}>내역 추가</div> */}
-          <Button className={styles.deleteButton} onClick={() => this.props.onDeleteAccount(index)} text="삭제" />
-          <Button onClick={undefined} text="자세히" />
-        </div>
-        <div className={styles.totalSummary}>
-          총&nbsp;
-          <text>{StringUtil.getCurrencyValue(account.getTotalIncome() + account.getTotalSpending())}</text>
-          &nbsp;원
+          <div
+            className={styles.deleteButton}
+            onClick={() => this.props.onDeleteAccount(index)}
+          >
+            삭제
+          </div>
+          <div className={styles.selectButton} onClick={() => null}>
+            선택
+          </div>
         </div>
       </div>
     );

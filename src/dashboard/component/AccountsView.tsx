@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
+import Slider from 'react-slick';
 
 import Account from '../../model/account/Account';
 
@@ -30,11 +31,10 @@ class AccountsView extends Component<AccountsViewProps, {}> {
             계좌 추가 +
           </div>
         </div>
-        <div className={styles.itemList}>
-          {accounts.length === 0
-            ? this.renderEmptyAccountBox()
-            : this.renderAccountItem(accounts)}
-        </div>
+
+        {accounts.length === 0
+          ? this.renderEmptyAccountBox()
+          : this.renderAccountItem(accounts)}
       </Container>
     );
   }
@@ -50,16 +50,27 @@ class AccountsView extends Component<AccountsViewProps, {}> {
   }
 
   renderAccountItem(accounts) {
-    return accounts.map((account, index) => (
-      <AccountItemView
-        key={index}
-        index={index}
-        account={account}
-        className={styles.accountItem}
-        onClickInput={this.props.onClickInput}
-        onDeleteAccount={this.props.onDeleteAccount}
-      />
-    ));
+    const settings = {
+      dots: true,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 3,
+      slidesToScroll: 3
+    };
+    return (
+      <Slider {...settings} className={styles.itemList}>
+        {accounts.map((account, index) => (
+          <AccountItemView
+            key={index}
+            index={index}
+            account={account}
+            className={styles.accountItem}
+            onClickInput={this.props.onClickInput}
+            onDeleteAccount={this.props.onDeleteAccount}
+          />
+        ))}
+      </Slider>
+    );
   }
 }
 
