@@ -1,0 +1,23 @@
+.container {
+  border-bottom: 1px solid lightgray;
+  .title {
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 700;
+    margin-right: 20px;
+    color: #0084dd;
+    padding: 18px 20px;
+  }
+  ul {
+    display: inline-block;
+    li {
+      display: inline-block;
+      padding: 20px 20px;
+      font-size: 20px;
+      vertical-align: super;
+      &:hover {
+        font-weight: 700;
+      }
+    }
+  }
+}

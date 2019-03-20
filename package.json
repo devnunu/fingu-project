@@ -8,6 +8,7 @@
     "autoprefixer": "^9.5.0",
     "classnames": "2.2.6",
     "common": "^0.2.5",
+    "nav": "0.0.2",
     "node-sass": "4.11.0",
     "parcel-bundler": "1.12.2",
     "postcss-modules": "^1.4.1",
