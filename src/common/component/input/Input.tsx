@@ -8,6 +8,7 @@ interface InputProps {
   className?: string;
   label: string;
   type: string;
+  value: string | number;
 }
 
 class Input extends Component<InputProps, {}> {
@@ -16,6 +17,7 @@ class Input extends Component<InputProps, {}> {
       <div className={classNames(styles.container, this.props.className)}>
         <p className={styles.label}>{this.props.label}</p>
         <input
+          value={this.props.value === undefined ? '' : this.props.value}
           className={styles.input}
           type={this.props.type}
           onChange={this.props.onChange}

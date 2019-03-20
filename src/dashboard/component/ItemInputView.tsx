@@ -30,16 +30,16 @@ interface ItemInputViewState {
 class ItemInputView extends Component<ItemInputViewProps, ItemInputViewState> {
   constructor(props) {
     super(props);
-    const initialItemType = ItemController.getItemTypeById(ItemType.INCOME);
-    const initialItemCategory = ItemController.getItemCategories(ItemType.INCOME)[0];
     this.state = {
-      item: new Item(undefined, undefined, initialItemType, initialItemCategory),
+      item: this.initialInputItem(),
     };
   }
 
   render() {
     const { account } = this.props;
     const { item } = this.state;
+    console.log('name', item.name);
+    console.log('amount', item.amount);
     return (
       <div className={styles.container}>
         <div className={styles.topBox}>
@@ -61,16 +61,18 @@ class ItemInputView extends Component<ItemInputViewProps, ItemInputViewState> {
           className={styles.inputItemName}
           type="text"
           label="내역명"
+          value={item.name}
           onChange={this.onChangeItemName.bind(this)}
         />
         <Input
           className={styles.inputItemAmount}
           type="number"
           label="금액"
+          value={item.amount}
           onChange={this.onChangeItemAmount.bind(this)}
         />
         <div className={styles.addButtonBox}>
-          <Button className={styles.addButton} text="추가" onClick={event => this.props.onAddAccountItem(item)} />
+          <Button className={styles.addButton} text="추가" onClick={event => this.handleAddAccountItem(event, item)} />
         </div>
       </div>
     );
@@ -99,6 +101,17 @@ class ItemInputView extends Component<ItemInputViewProps, ItemInputViewState> {
     const { item } = this.state;
     item.amount = parseInt(event.target.value);
     this.setState({ ...this.state, item });
+  }
+
+  private handleAddAccountItem(event, item) {
+    this.setState({ ...this.state, item: this.initialInputItem() });
+    this.props.onAddAccountItem(item);
+  }
+
+  private initialInputItem(): Item {
+    const initialItemType = ItemController.getItemTypeById(ItemType.INCOME);
+    const initialItemCategory = ItemController.getItemCategories(ItemType.INCOME)[0];
+    return new Item(undefined, undefined, initialItemType, initialItemCategory);
   }
 }
 

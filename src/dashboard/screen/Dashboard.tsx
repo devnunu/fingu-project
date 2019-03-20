@@ -94,7 +94,7 @@ class Dashboard extends Component<{}, DashboardState> {
     item.isSpending()
       ? user.accounts[selAccountIndex].spendings.push(item)
       : user.accounts[selAccountIndex].incomes.push(item);
-    this.setState({ ...this.state, user, selAccountIndex: -1 });
+    this.setState({ ...this.state, user });
   }
 }
 

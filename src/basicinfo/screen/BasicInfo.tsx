@@ -18,23 +18,26 @@ class BasicInfo extends Component<{}, BasicInfoState> {
   constructor(props) {
     super(props);
     this.state = {
-      user: new User()
+      user: new User(),
     };
   }
 
   render() {
+    const { user } = this.state;
     return (
       <div className={styles.container}>
         <Input
           className={styles.nameInput}
           label="이름"
           type="text"
+          value={user.name}
           onChange={this.onChangeUsername.bind(this)}
         />
         <Input
           className={styles.ageInput}
           label="나이"
           type="number"
+          value={user.age}
           onChange={this.onChangeUserAge.bind(this)}
         />
         <Button onClick={this.onClickSubmitButton.bind(this)} text="확인" />

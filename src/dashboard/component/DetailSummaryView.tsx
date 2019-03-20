@@ -14,8 +14,16 @@ class DetailSummaryView extends Component<DetailSummaryViewProps, {}> {
   render() {
     const { account } = this.props;
     return (
-      <div>
-        <div>{account.name}</div>
+      <div className={styles.container}>
+        <div className={styles.title}>{account.name}</div>
+        <div className={styles.incomeBox}>
+          <div className={styles.incomeLabel}>수입</div>
+          <div>{account.getTotalIncome()} 원</div>
+        </div>
+        <div className={styles.spendingBox}>
+          <div className={styles.spendingLabel}>지출</div>
+          <div>{account.getTotalSpending()} 원</div>
+        </div>
       </div>
     );
   }

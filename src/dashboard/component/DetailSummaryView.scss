@@ -1,0 +1,12 @@
+.container {
+  padding: 10px 0px;
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .incomeBox,
+  .spendingBox {
+    display: inline-block;
+    width: 50%;
+  }
+}
