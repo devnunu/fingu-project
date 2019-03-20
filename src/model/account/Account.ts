@@ -9,7 +9,9 @@ class Account {
   spendings: Item[];
   accountColor: string;
 
-  constructor() {
+  constructor(id: number) {
+    this.id = id;
+    this.name = '나의 계좌 ' + id;
     this.incomes = new Array();
     this.spendings = new Array();
     this.accountColor = StyleUtil.getRandomColor();
@@ -17,18 +19,12 @@ class Account {
 
   public getTotalIncome(): number {
     if (this.incomes === undefined || this.incomes.length === 0) return 0;
-    return this.incomes.reduce(
-      (result, nextItem) => result + nextItem.amount,
-      0
-    );
+    return this.incomes.reduce((result, nextItem) => result + nextItem.amount, 0);
   }
 
   public getTotalSpending(): number {
     if (this.spendings === undefined || this.spendings.length === 0) return 0;
-    return this.spendings.reduce(
-      (result, nextItem) => result + nextItem.amount,
-      0
-    );
+    return this.spendings.reduce((result, nextItem) => result + nextItem.amount, 0);
   }
 }
 

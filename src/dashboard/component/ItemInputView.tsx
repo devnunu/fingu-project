@@ -31,11 +31,9 @@ class ItemInputView extends Component<ItemInputViewProps, ItemInputViewState> {
   constructor(props) {
     super(props);
     const initialItemType = ItemController.getItemTypeById(ItemType.INCOME);
-    const initialItemCategory = ItemController.getItemCategories(
-      ItemType.INCOME
-    )[0];
+    const initialItemCategory = ItemController.getItemCategories(ItemType.INCOME)[0];
     this.state = {
-      item: new Item(undefined, undefined, initialItemType, initialItemCategory)
+      item: new Item(undefined, undefined, initialItemType, initialItemCategory),
     };
   }
 
@@ -47,16 +45,16 @@ class ItemInputView extends Component<ItemInputViewProps, ItemInputViewState> {
         <div className={styles.topBox}>
           <div className={styles.title}>내역 추가</div>
           <div className={styles.selectorBox}>
-          <Selector
-            className={styles.selectorType}
-            items={ItemController.getItemTypeNames()}
-            onChange={this.onChangeItemType.bind(this)}
-          />
-          <Selector
-            className={styles.selectorCategory}
-            items={ItemController.getCategoryNames(item.type.property)}
-            onChange={this.onChangeItemCategory.bind(this)}
-          />
+            <Selector
+              className={styles.selectorType}
+              items={ItemController.getItemTypeNames()}
+              onChange={this.onChangeItemType.bind(this)}
+            />
+            <Selector
+              className={styles.selectorCategory}
+              items={ItemController.getCategoryNames(item.type.property)}
+              onChange={this.onChangeItemCategory.bind(this)}
+            />
           </div>
         </div>
         <Input
@@ -72,11 +70,7 @@ class ItemInputView extends Component<ItemInputViewProps, ItemInputViewState> {
           onChange={this.onChangeItemAmount.bind(this)}
         />
         <div className={styles.addButtonBox}>
-          <Button
-            className={styles.addButton}
-            text="추가"
-            onClick={event => this.props.onAddAccountItem(item)}
-          />
+          <Button className={styles.addButton} text="추가" onClick={event => this.props.onAddAccountItem(item)} />
         </div>
       </div>
     );

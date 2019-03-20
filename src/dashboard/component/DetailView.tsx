@@ -6,6 +6,10 @@ import Item from 'model/item/Item';
 
 // view
 import ItemInputView from 'dashboard/component/ItemInputView';
+import Container from 'common/component/container/Container';
+
+// style
+import styles from './DetailView.scss';
 
 interface DetailViewProps {
   account: Account;
@@ -15,7 +19,11 @@ interface DetailViewProps {
 class DetailView extends Component<DetailViewProps, {}> {
   render() {
     const { account } = this.props;
-    return <ItemInputView account={account} onAddAccountItem={this.props.onAddAccountItem} />;
+    return (
+      <Container className={styles.container}>
+        <ItemInputView account={account} onAddAccountItem={this.props.onAddAccountItem} />
+      </Container>
+    );
   }
 }
 
