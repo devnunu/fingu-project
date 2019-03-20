@@ -9,57 +9,61 @@ class ItemController {
     this.itemTypes = [
       {
         property: ItemType.INCOME,
-        name: '수입'
+        name: ItemType.NAME_INCOME
       },
       {
         property: ItemType.SAVINGINVEST,
-        name: '저축투자'
+        name: ItemType.NAME_SAVINGINVENST
       },
       {
         property: ItemType.SPENDING,
-        name: '지출'
+        name: ItemType.NAME_SPENDING
       }
     ];
     this.itemCategories = [
       {
         parentItemType: ItemType.INCOME,
-        name: '급여 소득'
+        name: ItemCategory.NAME_SALARY
       },
       {
         parentItemType: ItemType.INCOME,
-        name: '사업 소득'
+        name: ItemCategory.NAME_BUSINESSINCOME
+      },
+      {
+        parentItemType: ItemType.INCOME,
+        name: ItemCategory.NAME_TRANSFER
       },
       {
         parentItemType: ItemType.SAVINGINVEST,
-        name: '유동성 자산'
+        name: ItemCategory.NAME_CURRENTASSETS
       },
       {
         parentItemType: ItemType.SAVINGINVEST,
-        name: '적립형 자산'
+        name: ItemCategory.NAME_SAVINGASSETS
       },
       {
         parentItemType: ItemType.SAVINGINVEST,
-        name: '주식형 자산'
+        name: ItemCategory.NAME_STOCKASSETS
       },
       {
         parentItemType: ItemType.SAVINGINVEST,
-        name: '연금성 자산'
+        name: ItemCategory.NAME_PENSIONASSETS
       },
       {
         parentItemType: ItemType.SAVINGINVEST,
-        name: '보장성 자산'
+        name: ItemCategory.NAME_INSURANCEASSETS
       },
       {
         parentItemType: ItemType.SPENDING,
-        name: '고정지출'
+        name: ItemCategory.NAME_FIXEDSPENDING
       },
       {
         parentItemType: ItemType.SPENDING,
-        name: '변동지출'
+        name: ItemCategory.NAME_VARIANCESPENDING
       },
       {
         parentItemType: ItemType.SPENDING,
-        name: '계절성지출'
+        name: ItemCategory.NAME_SEASONALSPENDING
       }
     ];
   }

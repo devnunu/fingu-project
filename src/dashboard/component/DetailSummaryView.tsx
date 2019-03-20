@@ -17,12 +17,16 @@ class DetailSummaryView extends Component<DetailSummaryViewProps, {}> {
       <div className={styles.container}>
         <div className={styles.title}>{account.name}</div>
         <div className={styles.incomeBox}>
-          <div className={styles.incomeLabel}>수입</div>
+          <div className={styles.incomeLabel}>초기 잔액</div>
           <div>{account.getTotalIncome()} 원</div>
         </div>
         <div className={styles.spendingBox}>
           <div className={styles.spendingLabel}>지출</div>
           <div>{account.getTotalSpending()} 원</div>
+        </div>
+        <div>
+          <div>합계</div> 
+          <div>{account.getTotalIncome()-account.getTotalSpending()} 원</div>
         </div>
       </div>
     );

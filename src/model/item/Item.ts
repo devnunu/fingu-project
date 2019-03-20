@@ -30,7 +30,7 @@ class Item {
       this.type !== undefined &&
       this.category !== undefined
     );
-  }
+    }
 }
 
 export default Item;

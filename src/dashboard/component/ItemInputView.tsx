@@ -38,8 +38,6 @@ class ItemInputView extends Component<ItemInputViewProps, ItemInputViewState> {
   render() {
     const { account } = this.props;
     const { item } = this.state;
-    console.log('name', item.name);
-    console.log('amount', item.amount);
     return (
       <div className={styles.container}>
         <div className={styles.topBox}>
