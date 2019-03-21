@@ -11,9 +11,11 @@ import ItemInputView from 'dashboard/component/ItemInputView';
 import DetailSummaryView from 'dashboard/component/DetailSummaryView';
 import HistoryTable from 'common/component/table/HistoryTable';
 
+// model
+import ItemType from 'model/item/ItemType';
+
 // style
 import styles from './DetailView.scss';
-import ItemType from 'model/item/ItemType';
 
 interface DetailViewProps {
   account: Account;
@@ -25,12 +27,13 @@ class DetailView extends Component<DetailViewProps, {}> {
     const { account } = this.props;
     return (
       <Container className={styles.container}>
-        <DetailSummaryView account={account} />
+        <DetailSummaryView className={styles.summaryView} account={account} />
         <ItemInputView
+          className={styles.inputBox}
           account={account}
           onAddAccountItem={this.props.onAddAccountItem}
         />
-        <div>
+        <div className={styles.historyBox}>
           {this.renderItemHistory(ItemType.NAME_SAVINGINVENST, true)}
           {this.renderItemHistory(ItemCategory.NAME_FIXEDSPENDING)}
           {this.renderItemHistory(ItemCategory.NAME_VARIANCESPENDING)}
@@ -44,7 +47,7 @@ class DetailView extends Component<DetailViewProps, {}> {
     const filteredItems = isType
       ? this.props.account.getSpendingItemByTypeName(name)
       : this.props.account.getSpendingItemByCategoryName(name);
-    return <HistoryTable title={name} items={filteredItems} />;
+    return <HistoryTable className={styles.historyTable} title={name} items={filteredItems} />;
   }
 }
 

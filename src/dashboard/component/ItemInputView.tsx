@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
+import classNames from 'classnames';
 
 // model
 import Item from '../../model/item/Item';
@@ -20,6 +20,7 @@ import styles from './ItemInputView.scss';
 
 interface ItemInputViewProps {
   account: Account;
+  className?: string;
   onAddAccountItem: (item: Item) => void;
 }
 
@@ -39,21 +40,19 @@ class ItemInputView extends Component<ItemInputViewProps, ItemInputViewState> {
     const { account } = this.props;
     const { item } = this.state;
     return (
-      <div className={styles.container}>
-        <div className={styles.topBox}>
+      <div className={classNames(styles.container, this.props.className)}>
           <div className={styles.title}>내역 추가</div>
-          <div className={styles.selectorBox}>
-            <Selector
-              className={styles.selectorType}
-              items={ItemController.getItemTypeNames()}
-              onChange={this.onChangeItemType.bind(this)}
-            />
-            <Selector
-              className={styles.selectorCategory}
-              items={ItemController.getCategoryNames(item.type.property)}
-              onChange={this.onChangeItemCategory.bind(this)}
-            />
-          </div>
+        <div className={styles.selectorBox}>
+          <Selector
+            className={styles.selectorType}
+            items={ItemController.getItemTypeNames()}
+            onChange={this.onChangeItemType.bind(this)}
+          />
+          <Selector
+            className={styles.selectorCategory}
+            items={ItemController.getCategoryNames(item.type.property)}
+            onChange={this.onChangeItemCategory.bind(this)}
+          />
         </div>
         <Input
           className={styles.inputItemName}

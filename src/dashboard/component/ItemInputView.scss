@@ -1,22 +1,21 @@
 .container {
-  .topBox {
+  margin-bottom: 15px;
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+  .selectorBox {
     margin-bottom: 15px;
-    .title,
-    .selectorBox {
+    .selectorType,
+    .selectorCategory {
       display: inline-block;
-      width: 50%;
+      width: 47%;
     }
-    .title {
-      font-size: 24px;
-      font-weight: 400;
+    .selectorType {
+      margin-right: 6%;
     }
-    .selectorBox {
-      text-align: right;
-      .selectorType {
-        margin-right: 10px;
-      }
-      .selectorCategory {
-      }
+    .selectorCategory {
     }
   }
   .inputItemName {

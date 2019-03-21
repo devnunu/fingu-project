@@ -1,6 +1,5 @@
 @import './font';
 @import './variable';
-
 /*==================== RESET ====================*/
 @charset "UTF-8";
 
@@ -51,9 +50,8 @@ select,
 textarea,
 label,
 optgroup {
-  font-family: 'Spoqa Han Sans', AppleSDGothicNeo-Regular, AppleSDGothic,
-    'Apple SD Gothic Neo', AppleGothic, 'Nanum Gothic', 'Malgun Gothic', 'Dotum',
-    Arial, sans-serif;
+  font-family: 'Spoqa Han Sans', AppleSDGothicNeo-Regular, AppleSDGothic, 'Apple SD Gothic Neo', AppleGothic,
+    'Nanum Gothic', 'Malgun Gothic', 'Dotum', Arial, sans-serif;
   font-weight: normal;
   line-height: 1;
   outline: 0 !important;

@@ -1,3 +1,24 @@
 .container {
   margin-top: 50px;
+  .summaryView {
+    margin-bottom: 30px;
+  }
+  .historyTable {
+    margin-bottom: 30px;
+  }
+  .inputBox,
+  .historyBox {
+    display: inline-block;
+
+    vertical-align: top;
+  }
+  .inputBox {
+    width: 40%;
+    padding-right: 30px;
+  }
+  .historyBox {
+    width: 60%;
+    padding-left: 30px;
+    border-left: 1px solid lightgray;
+  }
 }
