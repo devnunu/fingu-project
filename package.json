@@ -6,6 +6,7 @@
   "main": "src/index.tsx",
   "dependencies": {
     "autoprefixer": "^9.5.0",
+    "chart.js": "^2.8.0",
     "classnames": "2.2.6",
     "common": "^0.2.5",
     "nav": "0.0.2",
@@ -15,10 +16,12 @@
     "react": "^16.8.4",
     "react-animated-number": "^0.4.4",
     "react-bootstrap-table": "^4.3.1",
+    "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.8.4",
     "react-router": "4.3.1",
     "react-router-dom": "4.3.1",
     "react-slick": "^0.23.2",
+    "recharts": "^1.5.0",
     "semantic-ui-react": "^0.86.0",
     "typescript": "3.0.3"
   },

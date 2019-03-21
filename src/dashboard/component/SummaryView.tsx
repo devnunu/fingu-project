@@ -7,6 +7,7 @@ import User from '../../model/user/User';
 
 // view
 import Container from '../../common/component/container/Container';
+import FinguPieChart from 'common/component/chart/FinguPieChart';
 
 // style
 import styles from './SummaryView.scss';
@@ -27,21 +28,28 @@ class SummaryView extends Component<SummaryViewProps, {}> {
         <div className={styles.description}>
           안녕하세요 <span>{user.name}</span>님! 통장을 분리해서 합리적인 소비생활을 시작해볼까요?
         </div>
-        <div className={styles.status}>
-          <div className={styles.incomeSection}>
-            <p className={styles.incomeLabel}>수입</p>
-            <div className={styles.income}>
-              <span>{StringUtil.getCurrencyValue(user.getTotalIncome())}</span>
-              &nbsp;원
+        <div>
+          <div className={styles.status}>
+            <div className={styles.incomeSection}>
+              <div className={styles.income}>
+                <span>{StringUtil.getCurrencyValue(user.getTotalIncome())}</span>
+                &nbsp;원
+              </div>
+              <p className={styles.incomeLabel}>수입</p>
+            </div>
+            <div className={styles.spendingSection}>
+              <div className={styles.spending}>
+                <span>{StringUtil.getCurrencyValue(user.getTotalSpending())}</span>
+                &nbsp;원
+              </div>
+              <p className={styles.spendingLabel}>지출</p>
             </div>
           </div>
-          <div className={styles.spendingSection}>
-            <p className={styles.spendingLabel}>지출</p>
-            <div className={styles.spending}>
-              <span>{StringUtil.getCurrencyValue(user.getTotalSpending())}</span>
-              &nbsp;원
-            </div>
-          </div>
+          <FinguPieChart
+            className={styles.summaryChart}
+            labels={['소비', '저축투자', '지출', '미파악지출']}
+            data={[300, 50, 100, 200]}
+          />
         </div>
       </Container>
     );

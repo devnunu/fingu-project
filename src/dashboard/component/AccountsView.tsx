@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { Component } from 'react';
+import React,{ Component } from 'react';
 import Slider from 'react-slick';
 
 import Account from '../../model/account/Account';
