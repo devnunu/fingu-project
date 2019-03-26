@@ -5,29 +5,37 @@ interface FinguPieChartProps {
   className?: string;
   labels: string[];
   data: number[];
+  backgroundColor: string[];
+  hoverBackgroundColor: string[];
 }
 
 export default class FinguPieChart extends Component<FinguPieChartProps, {}> {
   render() {
+    const { backgroundColor, hoverBackgroundColor } = this.props;
     const data = {
-      labels: ['소비', '저축투자', '지출', '미파악지출'],
+      labels: this.props.labels,
       datasets: [
         {
           data: this.props.data,
-          backgroundColor: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'],
-          hoverBackgroundColor: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'],
-        },
-      ],
+          backgroundColor,
+          hoverBackgroundColor
+        }
+      ]
     };
     const options = {
       legend: {
-        display: false,
-      },
+        display: false
+      }
     };
     return (
       <div className={this.props.className}>
         <Doughnut data={data} options={options} />
       </div>
     );
+  }
+
+  private vaildProps(): boolean {
+    const { backgroundColor, hoverBackgroundColor } = this.props;
+    return backgroundColor.length === hoverBackgroundColor.length;
   }
 }

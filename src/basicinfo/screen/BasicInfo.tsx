@@ -18,7 +18,7 @@ class BasicInfo extends Component<{}, BasicInfoState> {
   constructor(props) {
     super(props);
     this.state = {
-      user: new User(),
+      user: new User()
     };
   }
 
@@ -26,6 +26,9 @@ class BasicInfo extends Component<{}, BasicInfoState> {
     const { user } = this.state;
     return (
       <div className={styles.container}>
+        <div className={styles.title}>
+          당신의 금융친구 <span>Fingu</span>
+        </div>
         <Input
           className={styles.nameInput}
           label="이름"
@@ -35,9 +38,9 @@ class BasicInfo extends Component<{}, BasicInfoState> {
         />
         <Input
           className={styles.ageInput}
-          label="나이"
+          label="월 단위 예산/수입"
           type="number"
-          value={user.age}
+          value={user.budget}
           onChange={this.onChangeUserAge.bind(this)}
         />
         <Button onClick={this.onClickSubmitButton.bind(this)} text="확인" />
@@ -47,20 +50,29 @@ class BasicInfo extends Component<{}, BasicInfoState> {
 
   private onClickSubmitButton(): void {
     const { user } = this.state;
-    user.dataSubmited = true;
-    UserController.setUser(this.state.user);
+    if (this.vaildInput()) {
+      user.dataSubmited = true;
+      UserController.setUser(user);
+    } else {
+      alert('모든값을 입력해 주세요!');
+    }
   }
 
-  private onChangeUsername(event) {
+  private onChangeUsername(event): void {
     const { user } = this.state;
     user.name = event.target.value;
     this.setState({ ...this.state, user });
   }
 
-  private onChangeUserAge(event) {
+  private onChangeUserAge(event): void {
     const { user } = this.state;
-    user.age = parseInt(event.target.value);
+    user.budget = parseInt(event.target.value);
     this.setState({ ...this.state, user });
+  }
+
+  private vaildInput(): boolean {
+    const { user } = this.state;
+    return user.name !== undefined && user.budget !== undefined;
   }
 }
 

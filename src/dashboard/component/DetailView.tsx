@@ -3,16 +3,12 @@ import React, { Component } from 'react';
 // model
 import Account from 'model/account/Account';
 import Item from 'model/item/Item';
-import ItemCategory from 'model/item/ItemCategory';
 
 // view
 import Container from 'common/component/container/Container';
 import ItemInputView from 'dashboard/component/ItemInputView';
 import DetailSummaryView from 'dashboard/component/DetailSummaryView';
 import HistoryTable from 'common/component/table/HistoryTable';
-
-// model
-import ItemType from 'model/item/ItemType';
 
 // style
 import styles from './DetailView.scss';
@@ -33,21 +29,9 @@ class DetailView extends Component<DetailViewProps, {}> {
           account={account}
           onAddAccountItem={this.props.onAddAccountItem}
         />
-        <div className={styles.historyBox}>
-          {this.renderItemHistory(ItemType.NAME_SAVINGINVENST, true)}
-          {this.renderItemHistory(ItemCategory.NAME_FIXEDSPENDING)}
-          {this.renderItemHistory(ItemCategory.NAME_VARIANCESPENDING)}
-          {this.renderItemHistory(ItemCategory.NAME_SEASONALSPENDING)}
-        </div>
+        <div className={styles.historyBox} />
       </Container>
     );
-  }
-
-  private renderItemHistory(name: string, isType?: boolean) {
-    const filteredItems = isType
-      ? this.props.account.getSpendingItemByTypeName(name)
-      : this.props.account.getSpendingItemByCategoryName(name);
-    return <HistoryTable className={styles.historyTable} title={name} items={filteredItems} />;
   }
 }
 

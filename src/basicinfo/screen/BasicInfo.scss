@@ -2,6 +2,15 @@
   margin-top: 100px;
   text-align: center;
 
+  .title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    span {
+      color: #0084dd;
+    }
+  }
+
   .nameInput {
     width: 50%;
     margin: 0px auto 15px;
