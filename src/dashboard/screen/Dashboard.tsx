@@ -23,7 +23,7 @@ class Dashboard extends Component<{}, DashboardState> {
     super(props);
     this.state = {
       user: new User(),
-      selAccountIndex: -1,
+      selAccountIndex: -1
     };
   }
 
@@ -54,7 +54,10 @@ class Dashboard extends Component<{}, DashboardState> {
           onDeleteAccount={this.onDeleteAccount.bind(this)}
         />
         {selAccountIndex > -1 ? (
-          <DetailView account={user.accounts[selAccountIndex]} onAddAccountItem={this.onAddAccountItem.bind(this)} />
+          <DetailView
+            account={user.accounts[selAccountIndex]}
+            onAddAccountItem={this.onAddAccountItem.bind(this)}
+          />
         ) : null}
       </div>
     );
@@ -63,7 +66,9 @@ class Dashboard extends Component<{}, DashboardState> {
   private onClickCreateAccount(): void {
     const { user } = this.state;
     const newAccount =
-      user.accounts.length > 0 ? new Account(user.accounts[user.accounts.length - 1].id + 1) : new Account(1);
+      user.accounts.length > 0
+        ? new Account(user.accounts[user.accounts.length - 1].id + 1)
+        : new Account(1);
     user.accounts.push(newAccount);
     UserController.setUser(user);
   }
@@ -91,9 +96,7 @@ class Dashboard extends Component<{}, DashboardState> {
 
   private handleAddAccountItem(item: Item) {
     const { user, selAccountIndex } = this.state;
-    item.isSpending()
-      ? user.accounts[selAccountIndex].spendings.push(item)
-      : user.accounts[selAccountIndex].incomes.push(item);
+    user.accounts[selAccountIndex].spendings.push(item);
     this.setState({ ...this.state, user });
   }
 }

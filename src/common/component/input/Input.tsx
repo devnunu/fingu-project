@@ -6,7 +6,7 @@ import styles from './Input.scss';
 interface InputProps {
   onChange: (event) => void;
   className?: string;
-  label: string;
+  label?: string;
   type: string;
   value: string | number;
 }

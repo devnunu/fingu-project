@@ -23,7 +23,11 @@ class DetailView extends Component<DetailViewProps, {}> {
     const { account } = this.props;
     return (
       <Container className={styles.container}>
-        <DetailSummaryView className={styles.summaryView} account={account} />
+        <DetailSummaryView
+          className={styles.summaryView}
+          account={account}
+          onChangeAccountName={this.onChangeAccountName.bind(this)}
+        />
         <ItemInputView
           className={styles.inputBox}
           account={account}
@@ -32,6 +36,15 @@ class DetailView extends Component<DetailViewProps, {}> {
         <div className={styles.historyBox} />
       </Container>
     );
+  }
+
+  private onChangeAccountName(accountName: string) {
+    const { account } = this.props;
+    account.name = accountName;
+    this.setState({
+      ...this.state,
+      account
+    });
   }
 }
 

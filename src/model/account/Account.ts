@@ -5,14 +5,12 @@ class Account {
   id: number;
   name: string;
   balance: number;
-  incomes: Item[];
   spendings: Item[];
   accountColor: string;
 
   constructor(id: number) {
     this.id = id;
     this.name = '나의 계좌 ' + id;
-    this.incomes = new Array();
     this.spendings = new Array();
     this.accountColor = StyleUtil.getRandomColor();
   }
