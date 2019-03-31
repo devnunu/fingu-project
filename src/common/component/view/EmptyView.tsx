@@ -13,7 +13,7 @@ class EmptyView extends Component<EmptyViewProps, {}> {
 
     return (
       <div className={styles.emptyAccountBox}>
-        <div className={styles.title}>앗 아직 {label} 등록이 되지않으셨군요!</div>
+        <div className={styles.title}>앗, 아직 {label} 등록이 되지않으셨군요!</div>
         <br />
         우측 상단의 <span>{label} 추가</span>를 눌러주세요.
       </div>

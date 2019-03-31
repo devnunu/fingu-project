@@ -18,7 +18,7 @@ interface AccountInputModalProps {
   modalOpen: boolean;
   title: string;
   description: string;
-  parentAccount: Account;
+  baseAccount: Account;
   onClickSubmit: (account: Account) => void;
   onRequestClose: () => void;
 }
@@ -45,7 +45,7 @@ class AccountInputModal extends Component<
   constructor(props) {
     super(props);
     this.state = {
-      account: props.parentAccount
+      account: props.baseAccount
     };
   }
 
@@ -55,6 +55,7 @@ class AccountInputModal extends Component<
     return (
       <Modal
         isOpen={modalOpen}
+        visible={modalOpen}
         onRequestClose={this.props.onRequestClose}
         className={styles.modal}
         style={this.customStyles}
@@ -65,14 +66,14 @@ class AccountInputModal extends Component<
           className={styles.input}
           label={'계좌 이름'}
           type={'text'}
-          value={account == undefined ? '' : account.name}
+          value={account === undefined ? '' : account.name}
           onChange={this.onChangeAccountName.bind(this)}
         />
         <Input
           className={styles.input}
           label={'초기 잔액'}
           type={'number'}
-          value={account == undefined ? '' : account.balance}
+          value={account === undefined ? '' : account.balance}
           onChange={this.onChangeAccountBalance.bind(this)}
         />
         <div className={styles.submitButtonBox}>
@@ -90,15 +91,22 @@ class AccountInputModal extends Component<
 
   private onChangeAccountBalance(event): void {
     const { account } = this.state;
-    account.balance = event.target.value;
+    account.balance = parseInt(event.target.value);
     this.setState({ ...this.state, account });
   }
 
   private handleClickSubmit() {
     const { account } = this.state;
-    StringUtil.isEmptyString(account.name) || account.balance === undefined
-      ? alert('모든 값을 입력해주세요')
-      : this.props.onClickSubmit(account);
+    if (
+      StringUtil.isEmptyString(account.name) ||
+      account.balance === undefined
+    ) {
+      alert('모든 값을 입력해주세요');
+      return;
+    }
+
+    this.props.onClickSubmit(account);
+    this.props.onRequestClose();
   }
 }
 

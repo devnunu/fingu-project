@@ -1,4 +1,4 @@
-import User from "../model/user/User";
+import User from '../model/user/User';
 
 class UserController {
   private user: User;

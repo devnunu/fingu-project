@@ -11,7 +11,6 @@ class Account {
   constructor(id: number) {
     this.id = id;
     this.name = '나의 계좌 ' + id;
-    this.balance = 0;
     this.spendings = new Array();
     this.accountColor = StyleUtil.getRandomColor();
   }
@@ -22,6 +21,11 @@ class Account {
       (result, nextItem) => result + nextItem.amount,
       0
     );
+  }
+
+  // 잔액 초과 인지 검사
+  public checkOveredBalance(amount: number): boolean {
+    return this.balance < this.getTotalSpending() + amount;
   }
 }
 

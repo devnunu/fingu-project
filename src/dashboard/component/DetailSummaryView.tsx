@@ -17,29 +17,13 @@ import styles from './DetailSummaryView.scss';
 interface DetailSummaryViewProps {
   className?: string;
   account: Account;
-  onClickModalOpen: () => void;
-  onChangeAccount: (account: Account) => void;
+  onClickItemInputModalOpen: () => void;
+  onClickUpdateAccountModalOpen: () => void;
 }
 
-interface DetailSummaryViewState {
-  isOpenAccountNameEditModal: boolean;
-}
-
-class DetailSummaryView extends Component<
-  DetailSummaryViewProps,
-  DetailSummaryViewState
-> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      ...this.state,
-      isOpenAccountNameEditModal: false
-    };
-  }
-
+class DetailSummaryView extends Component<DetailSummaryViewProps, {}> {
   render() {
     const { account } = this.props;
-    const { isOpenAccountNameEditModal } = this.state;
     const totalSpending = account.getTotalSpending();
     return (
       <div className={classNames(styles.container, this.props.className)}>
@@ -47,7 +31,7 @@ class DetailSummaryView extends Component<
           <div className={styles.titleBox}>
             <div
               className={styles.title}
-              onClick={this.onClickAccountNameEdit.bind(this)}
+              onClick={this.props.onClickUpdateAccountModalOpen}
             >
               {account.name}
               <span>
@@ -57,7 +41,7 @@ class DetailSummaryView extends Component<
           </div>
           <div
             className={styles.buttonAddItem}
-            onClick={this.props.onClickModalOpen}
+            onClick={this.props.onClickItemInputModalOpen}
           >
             내역 추가 +
           </div>
@@ -89,31 +73,8 @@ class DetailSummaryView extends Component<
             {StringUtil.getCurrencyValue(account.balance - totalSpending)} 원
           </div>
         </div>
-        <AccountInputModal
-          title={'계좌 정보 수정'}
-          description={'계좌 정보를 변경합니다'}
-          parentAccount={account}
-          modalOpen={isOpenAccountNameEditModal}
-          onClickSubmit={this.handleChangeAccount.bind(this)}
-          onRequestClose={this.onClickAccountNameEdit.bind(this)}
-        />
       </div>
     );
-  }
-
-  private onClickAccountNameEdit(): void {
-    this.setState({
-      ...this.state,
-      isOpenAccountNameEditModal: !this.state.isOpenAccountNameEditModal
-    });
-  }
-
-  private handleChangeAccount(account: Account) {
-    this.props.onChangeAccount(account);
-    this.setState({
-      ...this.state,
-      isOpenAccountNameEditModal: !this.state.isOpenAccountNameEditModal
-    });
   }
 }
 

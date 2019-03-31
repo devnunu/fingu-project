@@ -18,15 +18,15 @@ interface AccountsViewProps {
   accounts: Account[];
   selAccountIndex: number;
   totalAccountBalance: number;
-  onClickCreateAccount: () => void;
+  onClickAddAccountModalOpen: () => void;
   onClickSelectAccount: (selAccountIndex) => void;
-  onUpdateAccounts: (accounts: Account[]) => void;
   onDeleteAccount: (index: number) => void;
 }
 
 class AccountsView extends Component<AccountsViewProps, {}> {
   render() {
     const { accounts } = this.props;
+    console.log('accounts', accounts);
     return (
       <Container className={styles.conatiner}>
         <div className={styles.topSection}>
@@ -36,7 +36,7 @@ class AccountsView extends Component<AccountsViewProps, {}> {
           </div>
           <div
             className={styles.buttonAddAccount}
-            onClick={this.props.onClickCreateAccount}
+            onClick={this.props.onClickAddAccountModalOpen}
           >
             계좌 추가 +
           </div>

@@ -1,4 +1,5 @@
 import Account from '../account/Account';
+import { number } from 'prop-types';
 
 class User {
   name: string;
@@ -18,11 +19,22 @@ class User {
     );
   }
 
-  public getTotalAccountBalance(): number {
+  public getTotalAccountsBalance(): number {
     return this.accounts.reduce(
       (result, nextItem) => result + nextItem.balance,
       0
     );
+  }
+
+  // 예산 초과인지 검사
+  public checkOveredBudget(balance: number, selAccountIndex?: number): boolean {
+    if (selAccountIndex !== undefined) {
+      return this.budget <
+        this.getTotalAccountsBalance() -
+          this.accounts[selAccountIndex].balance +
+          balance;
+    }
+    return this.budget < this.getTotalAccountsBalance() + balance;
   }
 }
 

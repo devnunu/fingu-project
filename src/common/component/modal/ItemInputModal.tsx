@@ -115,7 +115,7 @@ class ItemInputModal extends Component<
       alert('모든 값을 입력해주세요');
     } else {
       this.props.onClickSubmit(item);
-      this.setState({ ...this.state, item: new Item() });
+      this.props.onRequestClose();
     }
   }
 }
