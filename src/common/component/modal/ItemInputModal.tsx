@@ -68,12 +68,14 @@ class ItemInputModal extends Component<
           className={styles.input}
           label={'내역명'}
           type={'text'}
+          value={item.name}
           onChange={this.onChangeItemName.bind(this)}
         />
         <Input
           className={styles.input}
           label={'금액'}
           type={'number'}
+          value={item.amount}
           onChange={this.onChangeItemBalance.bind(this)}
         />
         <InputTagSelector
@@ -109,9 +111,12 @@ class ItemInputModal extends Component<
 
   private handleClickSubmit() {
     const { item } = this.state;
-    StringUtil.isEmptyString(item.name) || item.amount === undefined
-      ? alert('모든 값을 입력해주세요')
-      : this.props.onClickSubmit(item);
+    if (StringUtil.isEmptyString(item.name) || item.amount === undefined) {
+      alert('모든 값을 입력해주세요');
+    } else {
+      this.props.onClickSubmit(item);
+      this.setState({ ...this.state, item: new Item() });
+    }
   }
 }
 

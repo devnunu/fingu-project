@@ -9,6 +9,7 @@ import StringUtil from 'common/utils/StringUtil';
 
 // view
 import AccountItemView from './AccountItemView';
+import EmptyView from 'common/component/view/EmptyView';
 import Container from '../../common/component/container/Container';
 
 import styles from './AccountsView.scss';
@@ -41,20 +42,12 @@ class AccountsView extends Component<AccountsViewProps, {}> {
           </div>
         </div>
 
-        {accounts.length === 0
-          ? this.renderEmptyAccountBox()
-          : this.renderAccountItem(accounts)}
+        {accounts.length === 0 ? (
+          <EmptyView label={'계좌'} />
+        ) : (
+          this.renderAccountItem(accounts)
+        )}
       </Container>
-    );
-  }
-
-  renderEmptyAccountBox() {
-    return (
-      <div className={styles.emptyAccountBox}>
-        앗 아직 계좌가 없군요!
-        <br />
-        우측 상단의 <span>계좌 추가</span>를 눌러주세요.
-      </div>
     );
   }
 

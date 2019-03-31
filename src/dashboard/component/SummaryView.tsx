@@ -21,6 +21,7 @@ class SummaryView extends Component<SummaryViewProps, {}> {
   render() {
     const { user } = this.props;
     const totalSpending = user.getTotalSpending();
+    const totalUnidentifiedSpending = user.budget - totalSpending;
 
     return (
       <Container className={styles.containter}>
@@ -51,12 +52,44 @@ class SummaryView extends Component<SummaryViewProps, {}> {
           <FinguPieChart
             className={styles.summaryChart}
             labels={['지출', '미파악지출']}
-            data={[totalSpending, user.budget - totalSpending]}
+            data={this.getPieChartData(
+              totalSpending,
+              totalUnidentifiedSpending
+            )}
             backgroundColor={['#00C49F', '#9c9c9c']}
             hoverBackgroundColor={['#00C49F', '#9c9c9c']}
           />
         </div>
       </Container>
+    );
+  }
+
+  private getPieChartData(totalSpending, totalUnidentifiedSpending): number[] {
+    return [
+      this.getTotalSpendingRatio(totalSpending, totalUnidentifiedSpending),
+      this.getTotalUnidentifiedSpendingRatio(
+        totalSpending,
+        totalUnidentifiedSpending
+      )
+    ];
+  }
+
+  private getTotalSpendingRatio(
+    totalSpending,
+    totalUnidentifiedSpending
+  ): number {
+    if (totalSpending == 0) return 0;
+    return (totalSpending * 100) / (totalSpending + totalUnidentifiedSpending);
+  }
+
+  private getTotalUnidentifiedSpendingRatio(
+    totalSpending,
+    totalUnidentifiedSpending
+  ): number {
+    if (totalUnidentifiedSpending == 0) return 0;
+    return (
+      (totalUnidentifiedSpending * 100) /
+      (totalSpending + totalUnidentifiedSpending)
     );
   }
 }

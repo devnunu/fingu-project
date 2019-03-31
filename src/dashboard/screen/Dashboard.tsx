@@ -8,7 +8,6 @@ import UserController from '../../controller/UserController';
 // view
 import SummaryView from 'dashboard/component/SummaryView';
 import AccountsView from 'dashboard/component/AccountsView';
-import ItemInputView from 'dashboard/component/ItemInputView';
 import DetailView from 'dashboard/component/DetailView';
 
 import styles from './Dashboard.scss';
@@ -92,8 +91,9 @@ class Dashboard extends Component<{}, DashboardState> {
   }
 
   private onAddAccountItem(item: Item) {
-    if (item.validAllProperties()) this.handleAddAccountItem(item);
-    else alert('모든 input을 입력해주세요');
+    const { user, selAccountIndex } = this.state;
+    user.accounts[selAccountIndex].spendings.push(item);
+    this.setState({ ...this.state, user });
   }
 
   private onChangeAccount(newAccount: Account) {
@@ -101,12 +101,6 @@ class Dashboard extends Component<{}, DashboardState> {
     user.accounts[selAccountIndex].name = newAccount.name;
     user.accounts[selAccountIndex].balance = newAccount.balance;
     UserController.setUser(user);
-  }
-
-  private handleAddAccountItem(item: Item) {
-    const { user, selAccountIndex } = this.state;
-    user.accounts[selAccountIndex].spendings.push(item);
-    this.setState({ ...this.state, user });
   }
 }
 

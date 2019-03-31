@@ -37,13 +37,7 @@ class AccountItemView extends Component<AccountItemViewProps, {}> {
         {/* 계좌 총 금액 */}
         <div className={styles.contentBox}>
           <div className={styles.totalAmount}>
-            <span>
-              {account.balance !== undefined
-                ? StringUtil.getCurrencyValue(
-                    account.balance + account.getTotalSpending()
-                  )
-                : '-'}
-            </span>
+            <span>{StringUtil.getCurrencyValue(account.balance)}</span>
             &nbsp;원
           </div>
         </div>
