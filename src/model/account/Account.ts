@@ -11,6 +11,7 @@ class Account {
   constructor(id: number) {
     this.id = id;
     this.name = '나의 계좌 ' + id;
+    this.balance = 0;
     this.spendings = new Array();
     this.accountColor = StyleUtil.getRandomColor();
   }

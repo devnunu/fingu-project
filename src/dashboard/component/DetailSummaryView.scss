@@ -1,13 +1,44 @@
 .container {
   padding: 10px 0px;
+  .icon {
+    text-align: right;
+  }
   .title {
+    display: inline-block;
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 20px;
+    cursor: pointer;
+    span {
+      margin-left: 5px;
+    }
+    &:hover {
+      color: #9c9c9c;
+    }
   }
   .incomeBox,
-  .spendingBox {
+  .spendingBox,
+  .totalAmountBox {
     display: inline-block;
-    width: 50%;
+    padding: 20px;
+    width: 32%;
+    color: white;
+    font-size: 16px;
+    .amount {
+      margin-top: 10px;
+      text-align: right;
+      font-size: 24px;
+    }
+  }
+  .incomeBox {
+    background: #4fccb1;
+    margin-right: 2%;
+  }
+  .spendingBox {
+    background: #4f4f4f;
+    margin-right: 2%;
+  }
+  .totalAmountBox {
+    background: #bc85ba;
   }
 }

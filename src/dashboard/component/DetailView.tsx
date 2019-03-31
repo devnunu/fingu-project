@@ -16,6 +16,7 @@ import styles from './DetailView.scss';
 interface DetailViewProps {
   account: Account;
   onAddAccountItem: (item: Item) => void;
+  onChangeAccount: (account: Account) => void;
 }
 
 class DetailView extends Component<DetailViewProps, {}> {
@@ -26,7 +27,7 @@ class DetailView extends Component<DetailViewProps, {}> {
         <DetailSummaryView
           className={styles.summaryView}
           account={account}
-          onChangeAccountName={this.onChangeAccountName.bind(this)}
+          onChangeAccount={this.props.onChangeAccount}
         />
         <ItemInputView
           className={styles.inputBox}
@@ -36,15 +37,6 @@ class DetailView extends Component<DetailViewProps, {}> {
         <div className={styles.historyBox} />
       </Container>
     );
-  }
-
-  private onChangeAccountName(accountName: string) {
-    const { account } = this.props;
-    account.name = accountName;
-    this.setState({
-      ...this.state,
-      account
-    });
   }
 }
 

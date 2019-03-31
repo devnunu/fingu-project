@@ -1,7 +1,11 @@
-import React,{ Component } from 'react';
+import React, { Component } from 'react';
 import Slider from 'react-slick';
 
+// model
 import Account from '../../model/account/Account';
+
+// util
+import StringUtil from 'common/utils/StringUtil';
 
 // view
 import AccountItemView from './AccountItemView';
@@ -12,6 +16,7 @@ import styles from './AccountsView.scss';
 interface AccountsViewProps {
   accounts: Account[];
   selAccountIndex: number;
+  totalAccountBalance: number;
   onClickCreateAccount: () => void;
   onClickSelectAccount: (selAccountIndex) => void;
   onUpdateAccounts: (accounts: Account[]) => void;
@@ -24,6 +29,10 @@ class AccountsView extends Component<AccountsViewProps, {}> {
     return (
       <Container className={styles.conatiner}>
         <div className={styles.topSection}>
+          <div className={styles.totalBudget}>
+            <span>총 계좌 잔액:</span>
+            {StringUtil.getCurrencyValue(this.props.totalAccountBalance)} 원
+          </div>
           <div
             className={styles.buttonAddAccount}
             onClick={this.props.onClickCreateAccount}

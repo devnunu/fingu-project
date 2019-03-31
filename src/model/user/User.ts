@@ -1,4 +1,4 @@
-import Account from "../account/Account";
+import Account from '../account/Account';
 
 class User {
   name: string;
@@ -14,6 +14,13 @@ class User {
   public getTotalSpending(): number {
     return this.accounts.reduce(
       (result, nextItem) => result + nextItem.getTotalSpending(),
+      0
+    );
+  }
+
+  public getTotalAccountBalance(): number {
+    return this.accounts.reduce(
+      (result, nextItem) => result + nextItem.balance,
       0
     );
   }

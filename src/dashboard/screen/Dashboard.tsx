@@ -48,6 +48,7 @@ class Dashboard extends Component<{}, DashboardState> {
         <AccountsView
           accounts={user.accounts}
           selAccountIndex={selAccountIndex}
+          totalAccountBalance={user.getTotalAccountBalance()}
           onClickCreateAccount={this.onClickCreateAccount.bind(this)}
           onClickSelectAccount={this.onClickSelectAccount.bind(this)}
           onUpdateAccounts={this.onUpdateAccounts.bind(this)}
@@ -57,6 +58,7 @@ class Dashboard extends Component<{}, DashboardState> {
           <DetailView
             account={user.accounts[selAccountIndex]}
             onAddAccountItem={this.onAddAccountItem.bind(this)}
+            onChangeAccount={this.onChangeAccount.bind(this)}
           />
         ) : null}
       </div>
@@ -92,6 +94,13 @@ class Dashboard extends Component<{}, DashboardState> {
   private onAddAccountItem(item: Item) {
     if (item.validAllProperties()) this.handleAddAccountItem(item);
     else alert('모든 input을 입력해주세요');
+  }
+
+  private onChangeAccount(newAccount: Account) {
+    const { user, selAccountIndex } = this.state;
+    user.accounts[selAccountIndex].name = newAccount.name;
+    user.accounts[selAccountIndex].balance = newAccount.balance;
+    UserController.setUser(user);
   }
 
   private handleAddAccountItem(item: Item) {
