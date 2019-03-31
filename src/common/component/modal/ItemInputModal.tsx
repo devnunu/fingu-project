@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 
 // model
-import Account from 'model/account/Account';
+import Item from 'model/item/Item';
+import { tagList } from 'model/item/Tag';
 
 // view
 import Input from 'common/component/input/Input';
 import Button from 'common/component/button/Button';
+import InputTagSelector from 'common/component/input/InputTagSelector';
 
 // util
 import StringUtil from 'common/utils/StringUtil';
@@ -14,22 +16,21 @@ import StringUtil from 'common/utils/StringUtil';
 // style
 import styles from './AccountInputModal.scss';
 
-interface AccountInputModalProps {
+interface ItemInputModalProps {
   modalOpen: boolean;
   title: string;
   description: string;
-  parentAccount: Account;
-  onClickSubmit: (account: Account) => void;
+  onClickSubmit: (item: Item) => void;
   onRequestClose: () => void;
 }
 
-interface AccountInputModalState {
-  account: Account;
+interface ItemInputModalState {
+  item: Item;
 }
 
-class AccountInputModal extends Component<
-  AccountInputModalProps,
-  AccountInputModalState
+class ItemInputModal extends Component<
+  ItemInputModalProps,
+  ItemInputModalState
 > {
   private customStyles = {
     content: {
@@ -42,16 +43,18 @@ class AccountInputModal extends Component<
       transform: 'translate(-50%, -50%)'
     }
   };
+
   constructor(props) {
     super(props);
     this.state = {
-      account: props.parentAccount
+      ...this.state,
+      item: new Item()
     };
   }
 
   render() {
     const { title, description, modalOpen } = this.props;
-    const { account } = this.state;
+    const { item } = this.state;
     return (
       <Modal
         isOpen={modalOpen}
@@ -63,17 +66,21 @@ class AccountInputModal extends Component<
         <div className={styles.description}>{description}</div>
         <Input
           className={styles.input}
-          label={'계좌 이름'}
+          label={'내역명'}
           type={'text'}
-          value={account == undefined ? '' : account.name}
-          onChange={this.onChangeAccountName.bind(this)}
+          onChange={this.onChangeItemName.bind(this)}
         />
         <Input
           className={styles.input}
-          label={'초기 잔액'}
+          label={'금액'}
           type={'number'}
-          value={account == undefined ? '' : account.balance}
-          onChange={this.onChangeAccountBalance.bind(this)}
+          onChange={this.onChangeItemBalance.bind(this)}
+        />
+        <InputTagSelector
+          label={'태그'}
+          tagList={tagList}
+          selTag={item.tag}
+          onSelected={this.onSelectedTag.bind(this)}
         />
         <div className={styles.submitButtonBox}>
           <Button text={'확인'} onClick={this.handleClickSubmit.bind(this)} />
@@ -82,24 +89,30 @@ class AccountInputModal extends Component<
     );
   }
 
-  private onChangeAccountName(event): void {
-    const { account } = this.state;
-    account.name = event.target.value;
-    this.setState({ ...this.state, account });
+  private onChangeItemName(event): void {
+    const { item } = this.state;
+    item.name = event.target.value;
+    this.setState({ ...this.state, item });
   }
 
-  private onChangeAccountBalance(event): void {
-    const { account } = this.state;
-    account.balance = event.target.value;
-    this.setState({ ...this.state, account });
+  private onChangeItemBalance(event): void {
+    const { item } = this.state;
+    item.amount = event.target.value;
+    this.setState({ ...this.state, item });
+  }
+
+  private onSelectedTag(tag: string): void {
+    const { item } = this.state;
+    item.tag = tag;
+    this.setState({ ...this.state, item });
   }
 
   private handleClickSubmit() {
-    const { account } = this.state;
-    StringUtil.isEmptyString(account.name) || account.balance === undefined
+    const { item } = this.state;
+    StringUtil.isEmptyString(item.name) || item.amount === undefined
       ? alert('모든 값을 입력해주세요')
-      : this.props.onClickSubmit(account);
+      : this.props.onClickSubmit(item);
   }
 }
 
-export default AccountInputModal;
+export default ItemInputModal;

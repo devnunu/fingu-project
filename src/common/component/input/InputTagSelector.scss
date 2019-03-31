@@ -1,0 +1,27 @@
+.container {
+  text-align: center;
+}
+
+.label {
+  text-align: initial;
+  margin-bottom: 10px;
+}
+.tagList {
+  text-align: initial;
+  .tag {
+    display: inline-block;
+    border: 1px solid #9c9c9c;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    color: #9c9c9c;
+    border-radius: 4px;
+    padding: 7px 10px;
+    cursor: pointer;
+  }
+
+  .selTag {
+    border: 1px solid #0084dd;
+    color: white;
+    background: #0084dd;
+  }
+}

@@ -8,7 +8,7 @@ interface InputProps {
   className?: string;
   label?: string;
   type: string;
-  value: string | number;
+  value?: string | number;
 }
 
 class Input extends Component<InputProps, {}> {

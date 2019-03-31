@@ -17,6 +17,7 @@ import styles from './DetailSummaryView.scss';
 interface DetailSummaryViewProps {
   className?: string;
   account: Account;
+  onClickModalOpen: () => void;
   onChangeAccount: (account: Account) => void;
 }
 
@@ -42,43 +43,51 @@ class DetailSummaryView extends Component<
     const totalSpending = account.getTotalSpending();
     return (
       <div className={classNames(styles.container, this.props.className)}>
-        <div>
+        <div className={styles.topDetailSummarySection}>
+          <div className={styles.titleBox}>
+            <div
+              className={styles.title}
+              onClick={this.onClickAccountNameEdit.bind(this)}
+            >
+              {account.name}
+              <span>
+                <Icon name="pencil alternate" size="small" />
+              </span>
+            </div>
+          </div>
           <div
-            className={styles.title}
-            onClick={this.onClickAccountNameEdit.bind(this)}
+            className={styles.buttonAddItem}
+            onClick={this.props.onClickModalOpen}
           >
-            {account.name}
-            <span>
-              <Icon name="pencil alternate" size="small" />
-            </span>
+            내역 추가 +
           </div>
         </div>
         <div className={styles.incomeBox}>
+          <div className={styles.label}>초기 잔액</div>
           <div className={styles.icon}>
             <Icon name="won sign" size="big" />
           </div>
           <div className={styles.amount}>
             {StringUtil.getCurrencyValue(account.balance)} 원
           </div>
-          <div className={styles.incomeLabel}>초기 잔액</div>
         </div>
         <div className={styles.spendingBox}>
+          <div className={styles.label}>지출</div>
           <div className={styles.icon}>
             <Icon name="money bill alternate outline" size="big" />
           </div>
           <div className={styles.amount}>
             {StringUtil.getCurrencyValue(totalSpending)} 원
           </div>
-          <div className={styles.spendingLabel}>지출</div>
         </div>
         <div className={styles.totalAmountBox}>
+          <div className={styles.label}>미파악 지출</div>
           <div className={styles.icon}>
             <Icon name="heart" size="big" />
           </div>
           <div className={styles.amount}>
             {StringUtil.getCurrencyValue(account.balance - totalSpending)} 원
           </div>
-          <div>합계</div>
         </div>
         <AccountInputModal
           title={'계좌 정보 수정'}

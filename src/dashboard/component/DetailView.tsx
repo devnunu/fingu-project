@@ -6,9 +6,8 @@ import Item from 'model/item/Item';
 
 // view
 import Container from 'common/component/container/Container';
-import ItemInputView from 'dashboard/component/ItemInputView';
 import DetailSummaryView from 'dashboard/component/DetailSummaryView';
-import HistoryTable from 'common/component/table/HistoryTable';
+import ItemInputModal from 'common/component/modal/ItemInputModal';
 
 // style
 import styles from './DetailView.scss';
@@ -19,24 +18,45 @@ interface DetailViewProps {
   onChangeAccount: (account: Account) => void;
 }
 
-class DetailView extends Component<DetailViewProps, {}> {
+interface DetailViewState {
+  isOpenAddItemModal: boolean;
+}
+
+class DetailView extends Component<DetailViewProps, DetailViewState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpenAddItemModal: false
+    };
+  }
+
   render() {
     const { account } = this.props;
+    const { isOpenAddItemModal } = this.state;
     return (
       <Container className={styles.container}>
         <DetailSummaryView
           className={styles.summaryView}
           account={account}
           onChangeAccount={this.props.onChangeAccount}
+          onClickModalOpen={this.onClickModalOpen.bind(this)}
         />
-        <ItemInputView
-          className={styles.inputBox}
-          account={account}
-          onAddAccountItem={this.props.onAddAccountItem}
+        <ItemInputModal
+          modalOpen={isOpenAddItemModal}
+          title={'내역 추가'}
+          description={'소비 내역을 추가합니다'}
+          onClickSubmit={this.props.onAddAccountItem}
+          onRequestClose={this.onClickModalOpen.bind(this)}
         />
-        <div className={styles.historyBox} />
       </Container>
     );
+  }
+
+  private onClickModalOpen() {
+    this.setState({
+      ...this.state,
+      isOpenAddItemModal: !this.state.isOpenAddItemModal
+    });
   }
 }
 
