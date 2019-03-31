@@ -26,7 +26,6 @@ interface AccountsViewProps {
 class AccountsView extends Component<AccountsViewProps, {}> {
   render() {
     const { accounts } = this.props;
-    console.log('accounts', accounts);
     return (
       <Container className={styles.conatiner}>
         <div className={styles.topSection}>

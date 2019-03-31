@@ -24,7 +24,13 @@ class Account {
   }
 
   // 잔액 초과 인지 검사
-  public checkOveredBalance(amount: number): boolean {
+  public checkOveredBalance(amount: number, selItemIndex?: number): boolean {
+    if (selItemIndex !== undefined) {
+      return (
+        this.balance <
+        this.getTotalSpending() - this.spendings[selItemIndex].amount + amount
+      );
+    }
     return this.balance < this.getTotalSpending() + amount;
   }
 }

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
+import { Icon } from 'semantic-ui-react';
 
 // model
 import Account from 'model/account/Account';
@@ -17,15 +19,18 @@ import styles from './DetailView.scss';
 
 interface DetailViewProps {
   account: Account;
+  selItemIndex: number;
   onChangeAccount: (account: Account) => void;
+  onDeleteItem: (index: number) => void;
+  onClickItem: (index: number) => void;
   onClickItemInputModalOpen: () => void;
+  onClickUpdateItemModalOpen: () => void;
   onClickUpdateAccountModalOpen: () => void;
 }
 
 class DetailView extends Component<DetailViewProps, {}> {
   render() {
     const { account } = this.props;
-    console.log('account', account);
     return (
       <Container className={styles.container}>
         <DetailSummaryView
@@ -46,17 +51,43 @@ class DetailView extends Component<DetailViewProps, {}> {
   }
 
   private renderItemList(spendings: Item[]) {
-    return spendings.map((spending, index) => {
-      return (
-        <div className={styles.itemList} key={index}>
-          <div className={styles.tag}>{spending.tag}</div>
-          <div className={styles.name}>{spending.name}</div>
-          <div className={styles.amount}>
-            {StringUtil.getCurrencyValue(spending.amount)}원
-          </div>
+    const { selItemIndex } = this.props;
+    return (
+      <div className={styles.itemListSection}>
+        <div className={styles.itemListHeader}>
+          <div className={classNames(styles.tag, styles.header)}>태그</div>
+          <div className={classNames(styles.name, styles.header)}>내역</div>
+          <div className={classNames(styles.amount, styles.header)}>금액</div>
         </div>
-      );
-    });
+        {spendings.map((spending, index) => {
+          return (
+            <div
+              className={classNames(styles.itemList, {
+                [styles.selected]: selItemIndex === index
+              })}
+              onClick={() =>
+                selItemIndex === index ? null : this.props.onClickItem(index)
+              }
+              key={index}
+            >
+              <div className={styles.tag}>{spending.tag}</div>
+              <div className={styles.name}>{spending.name}</div>
+              <div className={styles.amount}>
+                {StringUtil.getCurrencyValue(spending.amount)}원
+              </div>
+              <div
+                onClick={() => this.props.onClickUpdateItemModalOpen()}
+                className={styles.edit}
+              />
+              <div
+                onClick={() => this.props.onDeleteItem(index)}
+                className={styles.delete}
+              />
+            </div>
+          );
+        })}
+      </div>
+    );
   }
 }
 

@@ -20,6 +20,7 @@ interface ItemInputModalProps {
   modalOpen: boolean;
   title: string;
   description: string;
+  baseItem?: Item;
   onClickSubmit: (item: Item) => void;
   onRequestClose: () => void;
 }
@@ -48,7 +49,7 @@ class ItemInputModal extends Component<
     super(props);
     this.state = {
       ...this.state,
-      item: new Item()
+      item: props.baseItem != undefined ? props.baseItem : new Item()
     };
   }
 
@@ -99,7 +100,7 @@ class ItemInputModal extends Component<
 
   private onChangeItemBalance(event): void {
     const { item } = this.state;
-    item.amount = event.target.value;
+    item.amount = parseInt(event.target.value);
     this.setState({ ...this.state, item });
   }
 

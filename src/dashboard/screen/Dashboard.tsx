@@ -17,9 +17,11 @@ import styles from './Dashboard.scss';
 interface DashboardState {
   user: User;
   selAccountIndex: number;
+  selItemIndex: number;
   isOpenAddItemModal: boolean;
   isOpenAddAccountModal: boolean;
   isOpenUpdateAccountModal: boolean;
+  isOpenUpdateItemModal: boolean;
 }
 
 class Dashboard extends Component<{}, DashboardState> {
@@ -28,9 +30,11 @@ class Dashboard extends Component<{}, DashboardState> {
     this.state = {
       user: new User(),
       selAccountIndex: -1,
+      selItemIndex: -1,
       isOpenAddItemModal: false,
       isOpenAddAccountModal: false,
-      isOpenUpdateAccountModal: false
+      isOpenUpdateAccountModal: false,
+      isOpenUpdateItemModal: false
     };
   }
 
@@ -51,9 +55,11 @@ class Dashboard extends Component<{}, DashboardState> {
     const {
       user,
       selAccountIndex,
+      selItemIndex,
       isOpenAddItemModal,
       isOpenAddAccountModal,
-      isOpenUpdateAccountModal
+      isOpenUpdateAccountModal,
+      isOpenUpdateItemModal
     } = this.state;
     return (
       <div className={styles.container}>
@@ -71,7 +77,13 @@ class Dashboard extends Component<{}, DashboardState> {
         {selAccountIndex > -1 ? (
           <DetailView
             account={user.accounts[selAccountIndex]}
+            selItemIndex={selItemIndex}
             onChangeAccount={this.onChangeAccount.bind(this)}
+            onDeleteItem={this.onDeleteItem.bind(this)}
+            onClickItem={this.onClickItem.bind(this)}
+            onClickUpdateItemModalOpen={this.onClickUpdateItemModalOpen.bind(
+              this
+            )}
             onClickItemInputModalOpen={this.onClickItemInputModalOpen.bind(
               this
             )}
@@ -81,33 +93,56 @@ class Dashboard extends Component<{}, DashboardState> {
           />
         ) : null}
         {/* 아래는 전부 모달 */}
-        {isOpenAddItemModal && (
+        {(isOpenAddItemModal || isOpenUpdateItemModal) && (
           <ItemInputModal
             modalOpen={true}
-            title={'내역 추가'}
-            description={'소비 내역을 추가합니다'}
-            onClickSubmit={this.onAddAccountItem.bind(this)}
-            onRequestClose={this.onClickItemInputModalOpen.bind(this)}
+            title={isOpenAddItemModal ? '내역 추가' : '내역 수정'}
+            baseItem={
+              isOpenAddItemModal
+                ? undefined
+                : user.accounts[selAccountIndex].spendings[selItemIndex]
+            }
+            description={
+              isOpenAddItemModal
+                ? '소비 내역을 추가합니다'
+                : '소비 내역을 수정합니다'
+            }
+            onClickSubmit={
+              isOpenAddItemModal
+                ? this.onAddAccountItem.bind(this)
+                : this.onChangeItem.bind(this)
+            }
+            onRequestClose={
+              isOpenAddItemModal
+                ? this.onClickItemInputModalOpen.bind(this)
+                : this.onClickUpdateItemModalOpen.bind(this)
+            }
           />
         )}
-        {isOpenAddAccountModal && (
+        {(isOpenAddAccountModal || isOpenUpdateAccountModal) && (
           <AccountInputModal
-            title={'계좌 추가'}
-            description={'새로운 계좌를 추가합니다'}
-            baseAccount={this.getNewAccount()}
+            title={isOpenAddAccountModal ? '계좌 추가' : '계좌 정보 수정'}
+            description={
+              isOpenAddAccountModal
+                ? '새로운 계좌를 추가합니다'
+                : '계좌 정보를 변경합니다'
+            }
+            baseAccount={
+              isOpenAddAccountModal
+                ? this.getNewAccount()
+                : user.accounts[selAccountIndex]
+            }
             modalOpen={true}
-            onClickSubmit={this.onClickCreateAccount.bind(this)}
-            onRequestClose={this.onClickAddAccountModalOpen.bind(this)}
-          />
-        )}
-        {isOpenUpdateAccountModal && (
-          <AccountInputModal
-            title={'계좌 정보 수정'}
-            description={'계좌 정보를 변경합니다'}
-            baseAccount={user.accounts[selAccountIndex]}
-            modalOpen={true}
-            onClickSubmit={this.onChangeAccount.bind(this)}
-            onRequestClose={this.onClickUpdateAccountModalOpen.bind(this)}
+            onClickSubmit={
+              isOpenAddAccountModal
+                ? this.onClickCreateAccount.bind(this)
+                : this.onChangeAccount.bind(this)
+            }
+            onRequestClose={
+              isOpenAddAccountModal
+                ? this.onClickAddAccountModalOpen.bind(this)
+                : this.onClickUpdateAccountModalOpen.bind(this)
+            }
           />
         )}
       </div>
@@ -119,6 +154,14 @@ class Dashboard extends Component<{}, DashboardState> {
     this.setState({
       ...this.state,
       isOpenAddItemModal: !this.state.isOpenAddItemModal
+    });
+  }
+
+  // 소비 내역 업데이트 모달 오픈
+  private onClickUpdateItemModalOpen() {
+    this.setState({
+      ...this.state,
+      isOpenUpdateItemModal: !this.state.isOpenUpdateItemModal
     });
   }
 
@@ -176,9 +219,23 @@ class Dashboard extends Component<{}, DashboardState> {
     UserController.setUser(user);
   }
 
+  private onDeleteItem(index: number) {
+    const { user, selAccountIndex } = this.state;
+    user.accounts[selAccountIndex].spendings.splice(index, 1);
+    UserController.setUser(user);
+  }
+
   // 계좌 선택 시
   private onClickSelectAccount(selAccountIndex: number): void {
     this.setState({ ...this.state, selAccountIndex });
+  }
+
+  // 아이템 선택시
+  private onClickItem(selItemIndex: number) {
+    this.setState({
+      ...this.state,
+      selItemIndex: selItemIndex === this.state.selItemIndex ? -1 : selItemIndex
+    });
   }
 
   // 계좌 정보 변경
@@ -188,8 +245,23 @@ class Dashboard extends Component<{}, DashboardState> {
       alert('정해진 예산을 초과할 수 없습니다');
       return;
     }
-    user.accounts[selAccountIndex].name = newAccount.name;
-    user.accounts[selAccountIndex].balance = newAccount.balance;
+    user.accounts[selAccountIndex] = newAccount;
+    UserController.setUser(user);
+  }
+
+  // 소비 내역 변경
+  private onChangeItem(newItem: Item) {
+    const { user, selAccountIndex, selItemIndex } = this.state;
+    if (
+      user.accounts[selAccountIndex].checkOveredBalance(
+        newItem.amount,
+        selItemIndex
+      )
+    ) {
+      alert('정해진 잔액을 초과할 수 없습니다');
+      return;
+    }
+    user.accounts[selAccountIndex].spendings[selItemIndex] = newItem;
     UserController.setUser(user);
   }
 }
