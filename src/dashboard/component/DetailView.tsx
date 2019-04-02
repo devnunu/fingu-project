@@ -65,9 +65,7 @@ class DetailView extends Component<DetailViewProps, {}> {
               className={classNames(styles.itemList, {
                 [styles.selected]: selItemIndex === index
               })}
-              onClick={() =>
-                selItemIndex === index ? null : this.props.onClickItem(index)
-              }
+              onClick={() => this.props.onClickItem(index)}
               key={index}
             >
               <div className={styles.tag}>{spending.tag}</div>
