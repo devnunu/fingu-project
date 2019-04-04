@@ -1,0 +1,54 @@
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.statusBox {
+  margin-bottom: 80px;
+}
+
+.pieChart,
+.barChart {
+  width: 100%;
+}
+
+.barChart {
+  margin-top: 30px;
+}
+
+.pieChart {
+  margin: 40px 0px 30px;
+}
+
+.rightSpendingBox,
+.leftSpendingBox {
+  display: inline-block;
+  width: 50%;
+  .spendingTitle {
+    color: #0084dd;
+    margin-bottom: 8px;
+  }
+  .spendingAmount {
+    font-weight: 700;
+  }
+}
+
+table {
+  width: 100%;
+  tbody {
+    td {
+      border: 1px solid #ececec;
+      padding: 10px;
+    }
+    .tableRowKey {
+      width: 40%;
+      text-align: center;
+      background: #0084dd;
+      color: white;
+    }
+    .tableRowValue {
+      width: 60%;
+      text-align: right;
+    }
+  }
+}
