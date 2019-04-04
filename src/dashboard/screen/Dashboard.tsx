@@ -11,6 +11,7 @@ import AccountsView from 'dashboard/component/AccountsView';
 import DetailView from 'dashboard/component/DetailView';
 import ItemInputModal from 'common/component/modal/ItemInputModal';
 import AccountInputModal from 'common/component/modal/AccountInputModal';
+import Container from 'common/component/container/Container';
 
 import styles from './Dashboard.scss';
 
@@ -62,7 +63,7 @@ class Dashboard extends Component<{}, DashboardState> {
       isOpenUpdateItemModal
     } = this.state;
     return (
-      <div className={styles.container}>
+      <Container className={styles.container}>
         <SummaryView className={styles.summaryView} user={user} />
         <AccountsView
           accounts={user.accounts}
@@ -145,7 +146,7 @@ class Dashboard extends Component<{}, DashboardState> {
             }
           />
         )}
-      </div>
+      </Container>
     );
   }
 

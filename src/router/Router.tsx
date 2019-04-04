@@ -6,8 +6,9 @@ import UserController from '../controller/UserController';
 
 // view
 import Nav from '../nav/component/Nav';
-import Dashboard from '../dashboard/screen/Dashboard';
-import BasicInfo from '../basicinfo/screen/BasicInfo';
+import Dashboard from 'dashboard/screen/Dashboard';
+import BasicInfo from 'basicinfo/screen/BasicInfo';
+import Analysis from 'analysis/screen/Analysis';
 
 interface FinguRouterState {
   user: User;
@@ -46,7 +47,8 @@ class FinguRouter extends Component<{}, FinguRouterState> {
       <BrowserRouter>
         <div>
           <Nav />
-          <Route path="/" component={Dashboard} />
+          <Route path="/" exact component={Dashboard} />
+          <Route path="/analysis" component={Analysis} />
         </div>
       </BrowserRouter>
     );

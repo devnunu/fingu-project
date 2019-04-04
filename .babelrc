@@ -10,6 +10,7 @@
           "basicinfo": "./src/basicinfo",
           "controller": "./src/controller",
           "dashboard": "./src/dashboard",
+          "analysis": "./src/analysis",
           "model": "./src/model",
           "router": "./src/router"
         }
