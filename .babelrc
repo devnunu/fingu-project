@@ -11,6 +11,7 @@
           "controller": "./src/controller",
           "dashboard": "./src/dashboard",
           "analysis": "./src/analysis",
+          "adjust": "./src/adjust",
           "model": "./src/model",
           "router": "./src/router"
         }

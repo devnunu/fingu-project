@@ -9,6 +9,7 @@ import Nav from '../nav/component/Nav';
 import Dashboard from 'dashboard/screen/Dashboard';
 import BasicInfo from 'basicinfo/screen/BasicInfo';
 import Analysis from 'analysis/screen/Analysis';
+import Adjust from 'adjust/screen/Adjust'
 
 interface FinguRouterState {
   user: User;
@@ -49,6 +50,7 @@ class FinguRouter extends Component<{}, FinguRouterState> {
           <Nav />
           <Route path="/" exact component={Dashboard} />
           <Route path="/analysis" component={Analysis} />
+          <Route path="/adjust" component={Adjust} />
         </div>
       </BrowserRouter>
     );

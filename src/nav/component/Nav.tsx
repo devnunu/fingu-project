@@ -21,6 +21,9 @@ class Nav extends Component<{}, {}> {
             <li>
               <Link to={`/analysis`}>분석</Link>
             </li>
+            <li>
+              <Link to={`/adjust`}>조정</Link>
+            </li>
           </ul>
         </Container>
       </div>

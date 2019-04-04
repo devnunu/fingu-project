@@ -23,6 +23,15 @@ class Account {
     );
   }
 
+  public getSpendingByTag(tag: string) {
+    if (this.spendings === undefined || this.spendings.length === 0) return 0;
+    return this.spendings.reduce(
+      (result, nextItem) =>
+        tag === nextItem.tag ? result + nextItem.amount : result,
+      0
+    );
+  }
+
   // 잔액 초과 인지 검사
   public checkOveredBalance(amount: number, selItemIndex?: number): boolean {
     if (selItemIndex !== undefined) {

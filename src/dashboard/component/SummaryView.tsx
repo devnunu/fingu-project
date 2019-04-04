@@ -26,7 +26,7 @@ class SummaryView extends Component<SummaryViewProps, {}> {
     return (
       <Container className={styles.containter}>
         <div className={styles.title}>
-          당신의 금융친구 <span>Fingu</span>
+          당신의 금융친구 <span>FINGU</span>
         </div>
         <div className={styles.description}>
           안녕하세요 <span>{user.name}</span>님! 통장을 분리해서 합리적인
