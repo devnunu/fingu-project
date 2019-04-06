@@ -1,11 +1,32 @@
+.mainScreen {
+  width: 100vw;
+  height: 100vh;
+  background: url('../../common/assets/images/main_bg.jpg');
+}
+.mainScreen:before {
+  position: absolute;
+  content: '';
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to bottom, #b721ff99 0%, #21d4fd99 90%);
+}
+
 .container {
   position: absolute;
   top: 20%;
   left: 50%;
   transform: translate(-50%, 0%);
   text-align: center;
-  max-width: 700px;
+  max-width: 800px;
   margin: auto auto;
+  background: white;
+  padding: 40px 30px;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  animation-duration: 1.5s;
+  animation-name: fadeIn;
 
   .title {
     font-size: 36px;
@@ -22,5 +43,15 @@
 
   .ageInput {
     margin: 0px auto 20px;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
