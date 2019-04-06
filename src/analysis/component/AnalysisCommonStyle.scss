@@ -1,0 +1,48 @@
+.summaryChart {
+  margin: 0 auto;
+  padding: 0px 20px;
+}
+
+.contentBox,
+.graphBox {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.contentBox {
+  width: 70%;
+}
+
+.graphBox {
+  width: 30%;
+}
+
+.contentTitle {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.contentDesc {
+  font-size: 12px;
+  color: #9c9c9c;
+  margin-top: 10px;
+}
+
+table {
+  tr {
+    td {
+      text-align: right;
+    }
+  }
+}
+
+.tableRowKey {
+  background: #0084dd;
+  color: white;
+  text-align: center;
+}
+
+.summaryAmount {
+  background: #00c49f;
+}

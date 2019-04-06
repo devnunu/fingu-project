@@ -20,7 +20,7 @@ class TotalSpending {
     return this.spendingTagItems;
   }
 
-  public getTotalSpendingSummary() {
+  public getTotalSpendingSummary(): number {
     return tagList.reduce((result, nextItem) => {
       if (this.checkItemAmountValid(nextItem))
         return result + this.spendingTagItems[nextItem];

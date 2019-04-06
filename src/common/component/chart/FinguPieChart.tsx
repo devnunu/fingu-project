@@ -27,6 +27,7 @@ export default class FinguPieChart extends Component<FinguPieChartProps, {}> {
         display: false
       }
     };
+    console.log('data', data);
     return (
       <div className={this.props.className}>
         <Doughnut data={data} options={options} />

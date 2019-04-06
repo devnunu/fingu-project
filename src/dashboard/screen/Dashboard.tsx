@@ -200,7 +200,7 @@ class Dashboard extends Component<{}, DashboardState> {
       alert('정해진 예산을 초과할 수 없습니다');
       return;
     }
-
+    
     user.accounts.push(newAccount);
     UserController.setUser(user);
   }
