@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 
 // view
 import FinguPieChart from 'common/component/chart/FinguPieChart';
@@ -25,7 +25,7 @@ class AnalysisTableView extends Component<AnalysisTableViewProps, {}> {
       totalIncome,
       compareValue,
       compareValueName,
-      contentTitle,
+      contentTitle, 
       contentDesc
     } = this.props;
     return (
