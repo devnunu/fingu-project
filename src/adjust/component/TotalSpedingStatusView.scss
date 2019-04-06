@@ -17,7 +17,7 @@
 }
 
 .pieChart {
-  margin: 40px 0px 30px;
+  margin: 40px 0px 15px;
 }
 
 .rightSpendingBox,
@@ -56,5 +56,15 @@ table {
     .tableRowSummaryValue {
       font-weight: 700;
     }
+  }
+}
+.spnedingStatus {
+  text-align: center;
+  font-size: 20px;
+  margin: 0px 0px 30px;
+  font-weight: 700;
+  color: red;
+  &.statusGood {
+    color: #0084dd;
   }
 }

@@ -30,7 +30,7 @@ class TotalSpedingStatusView extends Component<
   render() {
     const { totalSpending, budget } = this.props;
     if (totalSpending === undefined) return null;
-    const spendingTagItems = totalSpending.getSpendingTagItems();
+    const spendingTagItems = totalSpending.spendingTagItems;
     const homeSpending =
       spendingTagItems['고정지출'] + spendingTagItems['변동지출'];
     return (
@@ -58,17 +58,32 @@ class TotalSpedingStatusView extends Component<
           backgroundColor={['#0088FE', '#00C49F']}
           hoverBackgroundColor={['#0088FE', '#00C49F']}
         />
+        <div
+          className={classNames(styles.spnedingStatus, {
+            [styles.statusGood]:
+              this.appropriateHomeSpending(budget) >= homeSpending
+          })}
+        >
+          {this.appropriateHomeSpending(budget) >= homeSpending
+            ? 'Good'
+            : 'Bad'}
+        </div>
         <div>
           <div className={styles.rightSpendingBox}>
             <div className={styles.spendingTitle}>
               조정 {this.getPreviousPostText()} 가계 지출 금액
             </div>
-            <div className={styles.spendingAmount}>{homeSpending}원</div>
+            <div className={styles.spendingAmount}>
+              {StringUtil.getCurrencyValue(homeSpending)}원
+            </div>
           </div>
           <div className={styles.leftSpendingBox}>
             <div className={styles.spendingTitle}>적정 가계 지출 금액</div>
             <div className={styles.spendingAmount}>
-              {budget === 0 ? 0 : Math.round(budget / 2)}원
+              {StringUtil.getCurrencyValue(
+                this.appropriateHomeSpending(budget)
+              )}
+              원
             </div>
           </div>
         </div>
@@ -76,8 +91,13 @@ class TotalSpedingStatusView extends Component<
     );
   }
 
+  private appropriateHomeSpending(budget: number): number {
+    return budget === 0 ? 0 : Math.round(budget / 2);
+  }
+
   private renderStatusTable(spedingTagItems: SpendingTagItems) {
-    const { totalSpending } = this.props;
+    const { totalSpending, budget } = this.props;
+    const totalSpendingAmount = totalSpending.getTotalSpendingSummary();
     return (
       <table>
         <tbody>
@@ -91,6 +111,12 @@ class TotalSpedingStatusView extends Component<
               </tr>
             );
           })}
+          <tr>
+            <td className={styles.tableRowKey}>미파악지출</td>
+            <td className={styles.tableRowValue}>
+              {StringUtil.getCurrencyValue(budget - totalSpendingAmount)}원
+            </td>
+          </tr>
           <tr>
             <td
               className={classNames(
@@ -106,10 +132,7 @@ class TotalSpedingStatusView extends Component<
                 styles.tableRowSummaryValue
               )}
             >
-              {StringUtil.getCurrencyValue(
-                totalSpending.getTotalSpendingSummary()
-              )}
-              원
+              {StringUtil.getCurrencyValue(budget)}원
             </td>
           </tr>
         </tbody>
@@ -122,21 +145,18 @@ class TotalSpedingStatusView extends Component<
   }
 
   private getChartData(spendingTagItems: SpendingTagItems): number[] {
+    const { budget, totalSpending } = this.props;
     return [
       spendingTagItems['저축투자'],
       this.getPureTotalSpending(spendingTagItems),
-      spendingTagItems['미파악지출']
+      budget - totalSpending.getTotalSpendingSummary()
     ];
   }
 
   private getPureTotalSpending(spendingTagItems: SpendingTagItems): number {
     let result = 0;
     tagList.forEach(tag => {
-      if (
-        tag !== '저축투자' &&
-        tag !== '미파악지출' &&
-        spendingTagItems[tag] !== undefined
-      )
+      if (tag !== '저축투자' && spendingTagItems[tag] !== undefined)
         result += spendingTagItems[tag];
     });
     return result;

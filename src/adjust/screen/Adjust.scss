@@ -1,15 +1,27 @@
 .container {
   padding: 48px 15px;
-  .title {
+  .headerBox {
+    vertical-align: top;
     display: inline-block;
-    font-size: 36px;
-    font-weight: 700;
-    line-height: 1.2;
-    padding-bottom: 8px;
-    span {
-      color: #0084dd;
+    width: 50%;
+    .title {
+      display: inline-block;
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.2;
+      padding-bottom: 8px;
+      span {
+        color: #0084dd;
+      }
     }
   }
+  .buttonAdjustBox {
+    vertical-align: top;
+    display: inline-block;
+    width: 50%;
+    text-align: right;
+  }
+
   .budgetBox {
     margin-bottom: 50px;
     .budgetTitle,

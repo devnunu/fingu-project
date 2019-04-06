@@ -6,14 +6,10 @@ export interface SpendingTagItems {
 }
 
 class TotalSpending {
-  private spendingTagItems: SpendingTagItems;
+  public spendingTagItems: SpendingTagItems;
 
   constructor(user: User) {
     this.spendingTagItems = this.generateSpedingTagItems(user);
-  }
-
-  public getSpendingTagItems() {
-    return this.spendingTagItems;
   }
 
   public generateSpedingTagItems(user: User): SpendingTagItems {
@@ -21,16 +17,20 @@ class TotalSpending {
     tagList.forEach(tag => {
       this.spendingTagItems[tag] = user.getSpendingByTag(tag);
     });
-    this.spendingTagItems['미파악지출'] = user.budget - user.getTotalSpending();
     return this.spendingTagItems;
   }
 
   public getTotalSpendingSummary() {
     return tagList.reduce((result, nextItem) => {
-      if (this.spendingTagItems[nextItem] !== undefined)
+      if (this.checkItemAmountValid(nextItem))
         return result + this.spendingTagItems[nextItem];
       else return result;
     }, 0);
+  }
+
+  private checkItemAmountValid(tag: string): boolean {
+    const amount = this.spendingTagItems[tag];
+    return amount !== undefined && amount !== null && !isNaN(amount);
   }
 }
 

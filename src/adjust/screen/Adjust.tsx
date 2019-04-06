@@ -6,14 +6,15 @@ import UserController from 'controller/UserController';
 // model
 import User from 'model/user/User';
 import TotalSpending from 'model/totalspeding/TotalSpending';
-import { tagList } from 'model/item/Tag';
 
 // view
 import Container from 'common/component/container/Container';
 import TotalSpendingStatusView from 'adjust/component/TotalSpedingStatusView';
+import Button from 'common/component/button/Button';
+import AdjustSpendingModal from 'adjust/component/AdjustSpendingModal';
 
 // util
-import StringUtil from 'common/utils/StringUtil'
+import StringUtil from 'common/utils/StringUtil';
 
 // styles
 import styles from './Adjust.scss';
@@ -22,6 +23,7 @@ interface AdjustState {
   baseSpending: TotalSpending;
   adjustSpending: TotalSpending;
   budget: number;
+  isAdjustModalOpen: boolean;
 }
 
 class Adjust extends Component<{}, AdjustState> {
@@ -35,36 +37,39 @@ class Adjust extends Component<{}, AdjustState> {
   }
 
   onFetchUser(user: User) {
-    const totalSpending = new TotalSpending(user);
+    // 변수 생성 후 대입하면 참조값이 복사되므로 각각의 인스턴스를 생성한다.
     this.setState({
       ...this.state,
-      baseSpending: totalSpending,
-      adjustSpending: totalSpending,
-      budget: user.budget
+      baseSpending: new TotalSpending(user),
+      adjustSpending: new TotalSpending(user),
+      budget: user.budget,
+      isAdjustModalOpen: false
     });
   }
 
   render() {
-    const {
-      baseSpending,
-      adjustSpending,
-      budget,
-    } = this.state;
+    const { baseSpending, adjustSpending, budget } = this.state;
     return (
       <Container className={styles.container}>
-        <div className={styles.title}>
-          한 달 예산을 <span>조정</span> 해볼게요.
+        <div className={styles.headerBox}>
+          <div className={styles.title}>
+            한 달 예산을 <span>조정</span> 해볼게요.
+          </div>
+          <div className={styles.description}>
+            항목을 꼼꼼히 살피고, 줄일수 있는 항목을 찾아봐요.
+          </div>
         </div>
-        <div className={styles.description}>
-          항목을 꼼꼼히 살피고, 줄일수 있는 항목을 찾아봐요.
+        <div className={styles.buttonAdjustBox}>
+          <Button
+            text="조정하기"
+            onClick={this.onClickAdjustModalOpenButton.bind(this)}
+          />
         </div>
         <div className={styles.budgetBox}>
-            <div className={styles.budgetTitle}>
-                유입합계
-            </div>
-            <div className={styles.budgetAmount}>
-                {StringUtil.getCurrencyValue(budget)}원
-            </div>
+          <div className={styles.budgetTitle}>유입합계</div>
+          <div className={styles.budgetAmount}>
+            {StringUtil.getCurrencyValue(budget)}원
+          </div>
         </div>
         <div className={styles.beforeAdjustBox}>
           <TotalSpendingStatusView
@@ -87,8 +92,29 @@ class Adjust extends Component<{}, AdjustState> {
             바람직합니다
           </div>
         </div>
+        <AdjustSpendingModal
+          title={'소비 조정 하기'}
+          description={'소비 내역을 조정해봐요'}
+          modalOpen={this.state.isAdjustModalOpen}
+          totalSpending={adjustSpending}
+          budget={budget}
+          onRequestClose={this.onClickAdjustModalOpenButton.bind(this)}
+          onClickSubmit={this.onClickAdjustSubmitButton.bind(this)}
+        />
       </Container>
     );
+  }
+
+  private onClickAdjustSubmitButton(newTotalSpending: TotalSpending) {
+    const { adjustSpending } = this.state;
+    this.setState({ ...this.state, adjustSpending: newTotalSpending });
+  }
+
+  private onClickAdjustModalOpenButton() {
+    this.setState({
+      ...this.state,
+      isAdjustModalOpen: !this.state.isAdjustModalOpen
+    });
   }
 }
 
