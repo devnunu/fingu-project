@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 
 // model
 import TotalSpending, {
