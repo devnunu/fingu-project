@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 
 // model
-import TotalSpending from 'model/totalspeding/TotalSpending';
+import TotalSpending, {
+  SpendingTagItems
+} from 'model/totalspeding/TotalSpending';
 import { tagList } from 'model/item/Tag';
 
 // view
@@ -18,7 +21,6 @@ interface TotalSpedingStatusViewProps {
   totalSpending: TotalSpending;
   isAfterAdjust: boolean;
   budget: number;
-  totalSpendingAmount: number;
 }
 
 class TotalSpedingStatusView extends Component<
@@ -27,19 +29,21 @@ class TotalSpedingStatusView extends Component<
 > {
   render() {
     const { totalSpending, budget } = this.props;
-    const homeSpending = totalSpending['고정지출'] + totalSpending['변동지출'];
     if (totalSpending === undefined) return null;
+    const spendingTagItems = totalSpending.getSpendingTagItems();
+    const homeSpending =
+      spendingTagItems['고정지출'] + spendingTagItems['변동지출'];
     return (
       <div>
         <div className={styles.title}>
           유출 조정 {this.getPreviousPostText()}
         </div>
         <div className={styles.statusBox}>
-          {this.renderStatusTable()}
+          {this.renderStatusTable(spendingTagItems)}
           <FinguHorizontoalBar
             className={styles.barChart}
             labels={['저축투자', '지출합계', '미파악지출']}
-            data={this.getChartData()}
+            data={this.getChartData(spendingTagItems)}
             backgroundColor={['#0088FE', '#00C49F', '#FFBB28']}
             hoverBackgroundColor={['#0088FE', '#00C49F', '#FFBB28']}
           />
@@ -72,7 +76,7 @@ class TotalSpedingStatusView extends Component<
     );
   }
 
-  private renderStatusTable() {
+  private renderStatusTable(spedingTagItems: SpendingTagItems) {
     const { totalSpending } = this.props;
     return (
       <table>
@@ -82,11 +86,32 @@ class TotalSpedingStatusView extends Component<
               <tr key={index}>
                 <td className={styles.tableRowKey}>{tag}</td>
                 <td className={styles.tableRowValue}>
-                  {StringUtil.getCurrencyValue(totalSpending[tag])}원
+                  {StringUtil.getCurrencyValue(spedingTagItems[tag])}원
                 </td>
               </tr>
             );
           })}
+          <tr>
+            <td
+              className={classNames(
+                styles.tableRowKey,
+                styles.tableRowSummaryKey
+              )}
+            >
+              합계
+            </td>
+            <td
+              className={classNames(
+                styles.tableRowValue,
+                styles.tableRowSummaryValue
+              )}
+            >
+              {StringUtil.getCurrencyValue(
+                totalSpending.getTotalSpendingSummary()
+              )}
+              원
+            </td>
+          </tr>
         </tbody>
       </table>
     );
@@ -96,24 +121,23 @@ class TotalSpedingStatusView extends Component<
     return this.props.isAfterAdjust ? '후' : '전';
   }
 
-  private getChartData(): number[] {
-    const { totalSpending } = this.props;
+  private getChartData(spendingTagItems: SpendingTagItems): number[] {
     return [
-      totalSpending['저축투자'],
-      this.getPureTotalSpending(),
-      totalSpending['미파악지출']
+      spendingTagItems['저축투자'],
+      this.getPureTotalSpending(spendingTagItems),
+      spendingTagItems['미파악지출']
     ];
   }
 
-  private getPureTotalSpending(): number {
+  private getPureTotalSpending(spendingTagItems: SpendingTagItems): number {
     let result = 0;
     tagList.forEach(tag => {
       if (
         tag !== '저축투자' &&
         tag !== '미파악지출' &&
-        this.props.totalSpending[tag] !== undefined
+        spendingTagItems[tag] !== undefined
       )
-        result += this.props.totalSpending[tag];
+        result += spendingTagItems[tag];
     });
     return result;
   }

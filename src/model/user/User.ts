@@ -35,15 +35,6 @@ class User {
     );
   }
 
-  public getTotalSpendingObject(): TotalSpending {
-    let totalSpending: TotalSpending = {};
-    tagList.forEach(tag => {
-      totalSpending[tag] = this.getSpendingByTag(tag);
-    });
-    totalSpending['미파악지출'] = this.budget - this.getTotalSpending();
-    return totalSpending;
-  }
-
   // 예산 초과인지 검사
   public checkOveredBudget(balance: number, selAccountIndex?: number): boolean {
     if (selAccountIndex !== undefined) {

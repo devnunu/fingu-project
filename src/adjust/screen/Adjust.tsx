@@ -21,7 +21,6 @@ import styles from './Adjust.scss';
 interface AdjustState {
   baseSpending: TotalSpending;
   adjustSpending: TotalSpending;
-  totalSpendingAmount: number;
   budget: number;
 }
 
@@ -36,12 +35,11 @@ class Adjust extends Component<{}, AdjustState> {
   }
 
   onFetchUser(user: User) {
-    const totalSpending = user.getTotalSpendingObject();
+    const totalSpending = new TotalSpending(user);
     this.setState({
       ...this.state,
       baseSpending: totalSpending,
       adjustSpending: totalSpending,
-      totalSpendingAmount: user.getTotalSpending(),
       budget: user.budget
     });
   }
@@ -51,7 +49,6 @@ class Adjust extends Component<{}, AdjustState> {
       baseSpending,
       adjustSpending,
       budget,
-      totalSpendingAmount
     } = this.state;
     return (
       <Container className={styles.container}>
@@ -74,7 +71,6 @@ class Adjust extends Component<{}, AdjustState> {
             totalSpending={baseSpending}
             isAfterAdjust={false}
             budget={budget}
-            totalSpendingAmount={totalSpendingAmount}
           />
         </div>
         <div className={styles.afterAdjustBox}>
@@ -82,7 +78,6 @@ class Adjust extends Component<{}, AdjustState> {
             totalSpending={adjustSpending}
             isAfterAdjust={true}
             budget={budget}
-            totalSpendingAmount={totalSpendingAmount}
           />
         </div>
         <div className={styles.descBox}>
