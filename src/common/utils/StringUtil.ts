@@ -4,7 +4,8 @@ class StringUtil {
       .toLocaleString('en')
       .split('.')[0];
 
-  public static isEmptyString = str => str === undefined || str === '';
+  public static isEmptyString = str =>
+    str === undefined || str === '' || str === null;
 }
 
 export default StringUtil;

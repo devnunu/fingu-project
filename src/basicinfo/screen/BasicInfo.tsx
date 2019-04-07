@@ -1,4 +1,4 @@
-import React,{ Component } from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 
 import User from '../../model/user/User';
@@ -7,6 +7,9 @@ import UserController from '../../controller/UserController';
 // view
 import Button from '../../common/component/button/Button';
 import Input from '../../common/component/input/Input';
+
+// util
+import StringUtil from 'common/utils/StringUtil';
 
 import styles from './BasicInfo.scss';
 
@@ -45,8 +48,14 @@ class BasicInfo extends Component<{}, BasicInfoState> {
             label="월 단위 예산/수입"
             type="number"
             value={user.budget}
-            onChange={this.onChangeUserAge.bind(this)}
+            onChange={this.onChangeUserIncome.bind(this)}
           />
+          <div className={styles.budgetAmount}>
+            {StringUtil.isEmptyString(user.budget) || isNaN(user.budget)
+              ? 0
+              : StringUtil.getCurrencyValue(user.budget)}
+            원
+          </div>
           <Button onClick={this.onClickSubmitButton.bind(this)} text="확인" />
         </div>
       </div>
@@ -69,7 +78,7 @@ class BasicInfo extends Component<{}, BasicInfoState> {
     this.setState({ ...this.state, user });
   }
 
-  private onChangeUserAge(event): void {
+  private onChangeUserIncome(event): void {
     const { user } = this.state;
     user.budget = parseInt(event.target.value);
     this.setState({ ...this.state, user });
@@ -77,7 +86,10 @@ class BasicInfo extends Component<{}, BasicInfoState> {
 
   private vaildInput(): boolean {
     const { user } = this.state;
-    return user.name !== undefined && user.budget !== undefined;
+    return (
+      !StringUtil.isEmptyString(user.name) &&
+      !StringUtil.isEmptyString(user.budget)
+    );
   }
 }
 

@@ -74,7 +74,7 @@ class Analysis extends Component<{}, AnalysisState> {
             '* 부채상환비율은 일반적으로 총소득 대비 30% 미만을 권장.'
           }
         />
-        <SummaryTableView totalSpending={totalSpending} budget={user.budget} />
+        <SummaryTableView className={styles.summaryTableBox} totalSpending={totalSpending} budget={user.budget} />
       </Container>
     );
   }
